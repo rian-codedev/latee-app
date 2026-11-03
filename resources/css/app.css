@@ -1,4 +1,8 @@
+/* Impor Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Manrope:wght@400..800&display=swap');
+
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 @import '../../vendor/livewire/flux/dist/flux.css';
 
 @source '../views';
@@ -9,8 +13,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Font Setup */
+    --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
 
+    /* Colors */
     --color-zinc-50: #fafafa;
     --color-zinc-100: #f5f5f5;
     --color-zinc-200: #e5e5e5;
@@ -23,9 +30,46 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
 
+    /* Flux UI Accent Colors */
     --color-accent: var(--color-neutral-800);
     --color-accent-content: var(--color-neutral-800);
     --color-accent-foreground: var(--color-white);
+
+    /* Brand Colors */
+    --color-brand-500: #3b82f6;
+    --color-brand-600: #2563eb;
+
+    /* =========================================
+       CUSTOM ANIMATIONS & TEXTURES
+       ========================================= */
+
+    /* 1. Efek Melayang (Float) */
+    --animate-float: float 6s ease-in-out infinite;
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    /* 2. Efek Pendaran Bernapas (Pulse Glow) */
+    --animate-pulse-glow: pulse-glow 5s ease-in-out infinite alternate;
+    @keyframes pulse-glow {
+        0% { opacity: 0.15; transform: scale(1); }
+        100% { opacity: 0.3; transform: scale(1.1); }
+    }
+
+    /* 3. Animasi Gradient Warna */
+    --animate-gradient-x: gradient-x 5s ease infinite;
+    @keyframes gradient-x {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    /* 4. Animasi Fade Up (Muncul dari bawah) */
+    --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    @keyframes fade-up {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
 }
 
 @layer theme {
@@ -37,13 +81,189 @@
 }
 
 @layer base {
-
     *,
     ::after,
     ::before,
     ::backdrop,
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
+    }
+
+    /* Terapkan Manrope ke Heading */
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-display tracking-tight;
+    }
+
+    /* Global Smooth Scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Global Transisi Halus untuk Semua Interaksi */
+    a, button, input, textarea, select {
+        @apply transition-all duration-300 ease-in-out;
+    }
+}
+
+@layer utilities {
+    /* Utility untuk menghentikan animasi jika user memilih reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+        .animate-float, .animate-pulse-glow, .animate-gradient-x, .animate-fade-up, .reveal, .reveal-left, .reveal-right, .reveal-zoom {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+    }
+
+    /* Utility untuk membuat gradient text bergerak */
+    .text-gradient-animated {
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+    }
+
+    /* =========================================
+       TEKSTUR (Noise & Pattern)
+       ========================================= */
+
+    /* 1. Tekstur Noise/Grain (Memberikan kesan premium & tactile) */
+    .bg-texture-noise {
+        position: relative;
+        isolation: isolate; /* Memastikan z-index pseudo-element tidak keluar */
+    }
+    .bg-texture-noise::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1; /* Berada di belakang konten */
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    /* 2. Tekstur Grid Halus */
+    .bg-texture-grid {
+        background-size: 40px 40px;
+        background-image:
+            linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    }
+
+    /* =========================================
+       ANIMASI IN & OUT (Scroll Reveal)
+       ========================================= */
+
+    /* Perbaikan: Gabungkan semua varian untuk mendapatkan base transition */
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-zoom {
+        opacity: 0;
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* Easing smooth */
+        will-change: opacity, transform;
+    }
+
+    /* Transformasi Awal */
+    .reveal { transform: translateY(40px); }
+    .reveal-left { transform: translateX(-50px); }
+    .reveal-right { transform: translateX(50px); }
+    .reveal-zoom { transform: scale(0.9); }
+
+    /* State Saat Muncul (In) */
+    .reveal.is-visible,
+    .reveal-left.is-visible,
+    .reveal-right.is-visible,
+    .reveal-zoom.is-visible {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+    }
+
+    /* State Saat Keluar (Out - di-scroll naik) */
+    .reveal.is-hidden-up,
+    .reveal-left.is-hidden-up,
+    .reveal-right.is-hidden-up,
+    .reveal-zoom.is-hidden-up {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+
+    /* Delay Utility */
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+    .delay-400 { transition-delay: 400ms; }
+    .delay-500 { transition-delay: 500ms; }
+
+    .prose {
+        --tw-prose-body: var(--color-slate-700);
+        --tw-prose-headings: var(--color-slate-900);
+        --tw-prose-links: var(--color-brand-600);
+        --tw-prose-bold: var(--color-slate-900);
+        --tw-prose-quotes: var(--color-slate-700);
+        --tw-prose-quote-borders: var(--color-brand-500);
+    }
+
+    /* Styling Global untuk List di dalam Prose */
+    .prose ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .prose ul li::marker {
+        color: var(--color-brand-600); /* Warna titik */
+        font-size: 1.1em;
+    }
+
+    .prose ol {
+        list-style-type: decimal;
+        padding-left: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .prose ol li::marker {
+        color: var(--color-brand-600); /* Warna angka */
+        font-weight: bold;
+    }
+
+    .prose li {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+    }
+    /* Styling Global untuk Gambar di dalam Prose */
+    .prose img {
+        border-radius: 1rem; /* Setara rounded-2xl */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Setara shadow-lg */
+        border: 1px solid var(--color-slate-200);
+        width: 100%;
+        object-fit: cover;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Styling untuk Gambar dengan Caption (figure) */
+    .prose figure {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .prose figcaption {
+        text-align: center;
+        font-size: 0.875rem; /* Setara text-sm */
+        color: var(--color-slate-500);
+        margin-top: 0.75rem;
+        font-style: italic; /* Opsional, membuat caption lebih elegan */
+    }
+
+    /* Memastikan gambar di dalam figure tidak memiliki margin ganda */
+    .prose figure img {
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -52,7 +272,7 @@
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
 }
 
 input:focus[data-flux-control],
@@ -60,11 +280,3 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
-
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */
-
-@import './users.css';
-
-@import './welcome.css';

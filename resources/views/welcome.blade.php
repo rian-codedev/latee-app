@@ -1,580 +1,526 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description"
-    content="Kenali Pondok Pesantren Annuqayah Latee, Guluk-Guluk, Sumenep: profil, kompleks putra dan putri, pendidikan, serta informasi pendaftaran santri baru.">
-<meta name="theme-color" content="#030404">
-<title>Pondok Pesantren Annuqayah Latee — P2AL</title>
-<link rel="icon" href="{{ asset('images/pesantren/logo.png') }}" type="image/png">
-<link rel="preload" href="{{ asset('fonts/gilroy/Gilroy-Regular.woff2') }}" as="font" type="font/woff2"
-    crossorigin>
-<link rel="preload" href="{{ asset('fonts/gilroy/Gilroy-SemiBold.woff2') }}" as="font" type="font/woff2"
-    crossorigin>
-@vite(['resources/css/app.css', 'resources/js/app.js'])
-@fluxAppearance
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Kenali Pondok Pesantren Annuqayah Latee, Guluk-Guluk, Sumenep: profil, kompleks putra dan putri, pendidikan, serta informasi pendaftaran santri baru.">
+    <meta name="theme-color" content="#030404">
+    <title>Pondok Pesantren Annuqayah Latee — P2AL</title>
+    <link rel="icon" href="{{ asset('images/pesantren/logo.png') }}" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Manrope:wght@400..800&display=swap" rel="stylesheet">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @fluxAppearance
 </head>
 
-<body class="welcome-page noise-bg" x-data="welcomePage" :class="{ 'motion-paused': reducedMotion || !pageVisible }"
-    @keydown.escape.window="menuOpen = false"
-    @visibilitychange.document="pageVisible = !document.hidden">
-    <a class="welcome-skip" href="#main">Lewati ke konten</a>
+<body class="bg-slate-50 text-slate-700 antialiased selection:bg-emerald-500 selection:text-white font-sans overflow-x-hidden bg-texture-grid">
 
-    {{-- ===================== NAVBAR ===================== --}}
-    <header
-        class="welcome-header nav-glass fixed left-0 right-0 top-0 z-50 border-b border-stone-200/60 bg-stone-50/80 transition-colors duration-500 dark:border-stone-800/60 dark:bg-stone-950/80">
-        <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-
-                {{-- Logo --}}
-                <div class="animate-slide-right flex items-center gap-3">
-                    <div class="dark:bg-sage-600 flex items-center justify-center rounded-lg">
-                        <img src="{{ asset('images/logo.webp') }}" alt="Logo" class="w-12" />
-                    </div>
-                    <div class="hidden sm:block">
-                        <p
-                            class="font-display text-md font-semibold leading-tight tracking-wide text-stone-900 dark:text-stone-50">
-                            {{ __('LATEE APP') }}</p>
-                        <p class="text-[10px] tracking-widest text-stone-500 dark:text-stone-400">PP. Annuqayah Latee
-                        </p>
-                    </div>
+    <!-- BEGIN: MainHeader -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a class="flex items-center gap-2.5 text-slate-900 group" href="#">
+                <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-base font-bold shadow-md shadow-slate-900/10 group-hover:scale-105 transition-transform duration-300">
+                    <img src="{{ asset('images/logo.webp') }}" alt="Logo" class="w-full h-full object-cover rounded-full">
                 </div>
-
-                {{-- Desktop Nav Links --}}
-                <div class="hidden items-center gap-1 md:flex">
-                    @foreach ([['Home', '#home'], ['Fitur', '#fitur'], ['Tentang', '#tentang'], ['Kontak', '#kontak']] as $item)
-                        <a href="{{ $item[1] }}"
-                            class="hover:text-sage-700 dark:hover:text-sage-300 hover:bg-sage-50 dark:hover:bg-sage-900/20 rounded-lg px-4 py-2 text-sm font-medium text-stone-600 transition-all duration-200 dark:text-stone-400">
-                            {{ $item[0] }}
-                        </a>
-                    @endforeach
-                </div>
-
-                {{-- Right Controls --}}
-                <div class="flex items-center gap-2">
-                    {{-- Dark Mode Toggle (navbar) --}}
-                    <button type="button"
-                        @click="toggleTheme"
-                        class="flex h-9 w-9 items-center justify-center rounded-lg text-stone-500 transition-colors hover:bg-stone-100 hover:text-stone-900 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-white"
-                        :aria-label="themeLabel"
-                        :title="themeLabel">
-                        {{-- Moon (tampil saat light) --}}
-                        <svg x-show="theme !== 'dark'" x-cloak class="h-5 w-5" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646
-               9.003 9.003 0 0012 21
-               9.003 9.003 0 008.354-5.646z" />
-                        </svg>
-
-                        {{-- Sun (tampil saat dark) --}}
-                        <svg x-show="theme === 'dark'" x-cloak class="h-5 w-5" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3
-               m15.364 6.364-.707-.707
-               M6.343 6.343l-.707-.707
-               m12.728 0-.707.707
-               M6.343 17.657l-.707.707
-               M16 12a4 4 0 11-8 0
-               4 4 0 018 0z" />
-                        </svg>
-                    </button>
-
-                    {{-- CTA Button --}}
-                    @guest()
-                        <a href="{{ route('login') }}"
-                            class="bg-sage-600 dark:bg-sage-500 hover:bg-sage-700 dark:hover:bg-sage-400 hover:shadow-sage-600/20 hidden items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:shadow-md sm:inline-flex">
-                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                            </svg>
-                            Masuk
-                        </a>
-                    @endguest
-                    @auth
-                        <a href="{{ route('dashboard') }}"
-                            class="bg-sage-600 dark:bg-sage-500 hover:bg-sage-700 dark:hover:bg-sage-400 hover:shadow-sage-600/20 hidden items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:shadow-md sm:inline-flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-4">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                            </svg>
-                            Dashboard
-                        </a>
-                    @endauth
-
-                    {{-- Mobile Menu Button --}}
-                    <button type="button"
-                        @click="menuOpen = !menuOpen"
-                        :aria-expanded="menuOpen"
-                        aria-controls="mobile-menu"
-                        aria-label="Buka menu navigasi"
-                        class="rounded-lg p-2 text-stone-500 transition-colors hover:bg-stone-100 md:hidden dark:text-stone-400 dark:hover:bg-stone-800">
-                        {{-- Hamburger --}}
-                        <svg x-show="!menuOpen" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        {{-- Close --}}
-                        <svg x-show="menuOpen" x-cloak class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </nav>
-
-        {{-- Mobile Menu Panel --}}
-        <div id="mobile-menu" x-show="menuOpen" x-cloak
-            x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 -translate-y-2"
-            x-transition:enter-end="opacity-100 translate-y-0"
-            x-transition:leave="transition ease-in duration-150"
-            x-transition:leave-start="opacity-100 translate-y-0"
-            x-transition:leave-end="opacity-0 -translate-y-2"
-            class="border-t border-stone-200/60 bg-stone-50/95 backdrop-blur md:hidden dark:border-stone-800/60 dark:bg-stone-950/95">
-            <nav class="mx-auto max-w-7xl px-4 py-3 sm:px-6">
-                <ul class="flex flex-col gap-1">
-                    @foreach ([['Home', '#home'], ['Fitur', '#fitur'], ['Tentang', '#tentang'], ['Kontak', '#kontak']] as $item)
-                        <li>
-                            <a href="{{ $item[1] }}" @click="menuOpen = false"
-                                class="hover:text-sage-700 dark:hover:text-sage-300 hover:bg-sage-50 dark:hover:bg-sage-900/20 block rounded-lg px-3 py-2 text-sm font-medium text-stone-600 dark:text-stone-400">
-                                {{ $item[0] }}
-                            </a>
-                        </li>
-                    @endforeach
-                    @guest
-                        <li class="pt-1">
-                            <a href="{{ route('login') }}" @click="menuOpen = false"
-                                class="bg-sage-600 dark:bg-sage-500 block rounded-lg px-3 py-2 text-center text-sm font-medium text-white">
-                                Masuk
-                            </a>
-                        </li>
-                    @endguest
-                </ul>
+                <span class="font-extrabold tracking-wider text-md text-slate-900">Annuqayah Latee</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <a class="hover:text-emerald-600 relative group transition-colors" href="#about">Profil<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a class="hover:text-emerald-600 relative group transition-colors" href="#pendidikan">Pendidikan<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a class="hover:text-emerald-600 relative group transition-colors" href="#berita">Berita<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a class="hover:text-emerald-600 relative group transition-colors" href="#blog">Blog<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a class="hover:text-emerald-600 relative group transition-colors" href="#contact">Kontak<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span></a>
             </nav>
+            <div class="flex items-center gap-4">
+                <a class="bg-slate-900 hover:bg-emerald-600 hover:-translate-y-0.5 text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-emerald-500/30" href="#login">Login</a>
+            </div>
         </div>
     </header>
 
-    <main id="main">
-        <section class="welcome-hero" x-data="{ heroVisible: false }" x-intersect:enter="heroVisible = true"
-            x-intersect:leave="heroVisible = false"
-            :class="{ 'hero-running': heroVisible && !reducedMotion && pageVisible }">
-            <div class="hero-gradient" aria-hidden="true"></div>
-            <div class="orb orb-primary" aria-hidden="true"></div>
-            <div class="orb orb-secondary" aria-hidden="true"></div>
-            <div class="welcome-container hero-content" :class="{ 'hero-entered': ready }">
-                <span class="welcome-pill"><i></i> Pondok Pesantren Annuqayah Latee · P2AL</span>
-                <h1>Melahirkan generasi<br><span>berilmu dan bertakwa.</span></h1>
-                <p>Membentuk insan yang mendalami agama, berwawasan luas,<br>dan hadir membimbing masyarakat.</p>
-                <div class="hero-actions"><a class="welcome-button"
-                        href="https://pp.annuqayahlatee.id/santri-baru/">Informasi santri baru <span>↗</span></a><a
-                        class="welcome-text-link" href="#profil"><span class="play-circle">↘</span> Mengenal
-                        Annuqayah
-                        Latee</a></div>
-                <a class="hero-scroll" href="#kompleks"><span>JELAJAHI PESANTREN</span><span>↓</span></a>
+    <main>
+        <!-- BEGIN: HeroSection -->
+        <section class="relative w-full py-10 md:py-16 px-4 md:px-6 overflow-hidden flex justify-center">
+            <!-- MAIN CONTAINER DENGAN TEKSTUR -->
+            <div class="relative w-full max-w-[1400px] min-h-[500px] md:min-h-[600px] lg:min-h-[650px] rounded-[2.5rem] overflow-hidden flex flex-col lg:flex-row items-center shadow-2xl bg-white border border-slate-100 bg-texture-noise">
+
+                <!-- Background Layer & Glow -->
+                <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                    <div class="absolute inset-0 bg-slate-50/50"></div>
+                    <div class="absolute top-0 -left-20 w-[500px] h-[500px] bg-emerald-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse-glow"></div>
+                    <div class="absolute top-0 -right-20 w-[500px] h-[500px] bg-teal-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse-glow" style="animation-delay: 2s;"></div>
+                    <div class="absolute -bottom-40 left-1/2 w-[500px] h-[500px] bg-cyan-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse-glow" style="animation-delay: 4s;"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/60 to-transparent lg:to-transparent"></div>
+                </div>
+
+                <!-- Konten Kiri (Teks) -->
+                <div class="relative z-30 w-full lg:w-[55%] px-8 md:px-12 lg:px-16 py-12 lg:py-16 space-y-5 md:space-y-6 flex flex-col justify-center text-center lg:text-left">
+                    <div class="reveal inline-flex items-center justify-center lg:justify-start gap-3">
+                        <span class="text-[10px] md:text-xs font-bold tracking-[0.2em] text-emerald-700 uppercase bg-white/80 backdrop-blur-md px-4 py-2 rounded-full shadow-sm border border-emerald-100">
+                            Selamat Datang di Annuqayah Latee
+                        </span>
+                    </div>
+
+                    <h1 class="reveal delay-100 text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-extrabold text-slate-900 leading-[1.1]">
+                        Membangun<br />
+                        Generasi Qur'ani<br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 animate-gradient-x text-gradient-animated">Berakhlak Mulia</span>
+                    </h1>
+
+                    <p class="reveal delay-200 text-slate-600 text-sm sm:text-base max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                        Pondok Pesantren Annuqayah Latee merupakan bagian integral dari Pondok Pesantren Annuqayah Guluk-Guluk Sumenep Jawa Timur. Didirikan pada tahun 1923 oleh KH. Abdullah Sajjad.
+                    </p>
+
+                    <div class="reveal delay-300 flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#daftar" class="group inline-flex items-center gap-3 bg-slate-900 hover:bg-emerald-600 text-white font-semibold text-sm md:text-base px-7 py-3.5 rounded-full shadow-xl shadow-slate-900/20 hover:shadow-emerald-600/30 transition-all duration-300 hover:-translate-y-1">
+                            <span>Informasi Pendaftaran</span>
+                            <span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 group-hover:translate-x-1 transition-all">
+                                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Objek Gambar -->
+                <div class="relative z-20 w-[80%] max-w-sm mx-auto mt-8 lg:mt-0 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[50%] xl:w-[45%] lg:max-w-none lg:translate-x-[10%] pointer-events-none reveal-right delay-400">
+                    <div class="relative transform lg:scale-100 xl:scale-110 drop-shadow-[0_25px_25px_rgba(0,0,0,0.15)] flex justify-center animate-float">
+                        <img alt="Santri Annuqayah Latee" class="w-full h-auto object-contain lg:mix-blend-multiply" src="{{ asset('images/boys.png') }}" onerror="this.src='https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop'" />
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section x-data="{ shown: false }" x-intersect.once="shown = true"
-            :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }"
-            class="welcome-metrics welcome-container welcome-reveal" aria-label="Sekilas Annuqayah Latee">
-            <div>
-                <p>Tahun berdiri Latee</p><strong>1923</strong>
-            </div>
-            <div>
-                <p>Kompleks pesantren</p><strong>3<span> Kompleks</span></strong>
-            </div>
-            <div>
-                <p>Lokasi pesantren</p><strong><span>Guluk-Guluk</span></strong>
-            </div>
-            <small>Bagian dari Pondok Pesantren Annuqayah, Sumenep.</small>
-        </section>
-
-        <section class="welcome-section welcome-container welcome-cases" id="kompleks">
-            <div class="welcome-section-heading welcome-reveal" x-data="{ shown: false }"
-                x-intersect.once="shown = true"
-                :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }"><span
-                    class="welcome-pill">Kompleks pesantren</span>
-                <h2>Satu tradisi keilmuan.<br><span>Tiga lingkungan pendidikan.</span></h2>
-                <p>Mengenal kompleks putra dan putri<br>di Pondok Pesantren Annuqayah Latee.</p>
-            </div>
-
-            <div class="case-tabs" role="tablist" aria-label="Kompleks Annuqayah Latee">
-                <button id="case-tab-0" role="tab" aria-selected="true" aria-controls="case-panel-0" data-case="0"
-                    @click="activeTab = 0" :aria-selected="activeTab === 0" :tabindex="activeTab === 0 ? 0 : -1"
-                    @keydown="tabKey($event, 0)">Latee Putra <span>↗</span></button>
-                <button id="case-tab-1" role="tab" aria-selected="false" aria-controls="case-panel-1" tabindex="-1"
-                    data-case="1" @click="activeTab = 1" :aria-selected="activeTab === 1"
-                    :tabindex="activeTab === 1 ? 0 : -1" @keydown="tabKey($event, 1)">Latee I Putri
-                    <span>↗</span></button>
-                <button id="case-tab-2" role="tab" aria-selected="false" aria-controls="case-panel-2" tabindex="-1"
-                    data-case="2" @click="activeTab = 2" :aria-selected="activeTab === 2"
-                    :tabindex="activeTab === 2 ? 0 : -1" @keydown="tabKey($event, 2)">Latee II Putri
-                    <span>↗</span></button>
-            </div>
-
-            @php
-                $complexes = [
-                    [
-                        'title' => 'Pondok Pesantren Annuqayah Latee Putra',
-                        'copy' =>
-                            'Kompleks putra menerapkan kepengasuhan kolektif. Laman resmi menyebut KH. Abd. A’la sebagai ketua Dewan Pengasuh.',
-                        'value' => 'Putra',
-                        'label' => 'Pondok Pesantren Annuqayah Latee',
-                        'focus' => 'Kolektif',
-                        'focus_label' => 'Sistem kepengasuhan',
-                        'area' => 'Latee',
-                        'image' => 'masjid.jpg',
-                        'alt' => 'Masjid Latee, dokumentasi website pesantren',
-                        'url' => 'program/',
-                    ],
-                    [
-                        'title' => 'Pondok Pesantren Annuqayah Latee I Putri',
-                        'copy' =>
-                            'Kompleks Latee I menyediakan pendidikan, kegiatan peribadatan, peminatan, serta layanan publikasi dan perpustakaan bagi santri putri.',
-                        'value' => 'Putri',
-                        'label' => 'Pondok Pesantren Annuqayah Latee I',
-                        'focus' => 'Pendidikan',
-                        'focus_label' => 'Program santri',
-                        'area' => 'Latee I',
-                        'image' => 'kitab.jpg',
-                        'alt' => 'Kitab dalam dokumentasi pendidikan Annuqayah Latee',
-                        'url' => 'latee-i-putri/',
-                    ],
-                    [
-                        'title' => 'Pondok Pesantren Annuqayah Latee II Putri',
-                        'copy' =>
-                            'Program Latee II mencakup pendidikan, peribadatan, peminatan, publikasi, dan pembinaan tata busana sesuai lingkungan pesantren.',
-                        'value' => 'Putri',
-                        'label' => 'Pondok Pesantren Annuqayah Latee II',
-                        'focus' => 'Pembinaan',
-                        'focus_label' => 'Kehidupan santri',
-                        'area' => 'Latee II',
-                        'image' => 'kegiatan.jpg',
-                        'alt' => 'Dokumentasi kegiatan santri dari website Annuqayah Latee',
-                        'url' => 'latee-ii-putri/',
-                    ],
-                ];
-            @endphp
-
-            <div class="case-panel-stage">
-                @foreach ($complexes as $index => $complex)
-                    <div class="case-panel" id="case-panel-{{ $index }}" role="tabpanel"
-                        aria-labelledby="case-tab-{{ $index }}" tabindex="0"
-                        x-show="activeTab === {{ $index }}" :inert="activeTab !== {{ $index }}"
-                        :aria-hidden="activeTab !== {{ $index }}" x-transition:enter="panel-enter"
-                        x-transition:enter-start="panel-from" x-transition:enter-end="panel-to"
-                        x-transition:leave="panel-leave" x-transition:leave-start="panel-to"
-                        x-transition:leave-end="panel-from" @if ($index !== 0) x-cloak @endif>
-                        <div class="case-copy"><span class="welcome-overline">KOMPLEKS PESANTREN /
-                                0{{ $index + 1 }}</span>
-                            <h3>{{ $complex['title'] }}</h3>
-                            <div class="case-highlight">{{ $complex['value'] }}<span>{{ $complex['label'] }}</span>
-                            </div>
-                            <p>{{ $complex['copy'] }}</p>
-                            <div class="case-numbers">
-                                <div>
-                                    <strong>{{ $complex['focus'] }}</strong><span>{{ $complex['focus_label'] }}</span>
-                                </div>
-                                <div><strong>{{ $complex['area'] }}</strong><span>Kompleks pesantren</span></div>
-                            </div><a class="welcome-text-link"
-                                href="https://pp.annuqayahlatee.id/{{ $complex['url'] }}">Kenali kompleks
-                                <span>↗</span></a>
-                        </div>
-                        <div class="case-art">
-                            <div class="case-orbit"></div><img
-                                src="{{ asset('images/pesantren/' . $complex['image']) }}"
-                                alt="{{ $complex['alt'] }}" width="1024" height="637" loading="lazy"><span
-                                class="platform-label">Dokumentasi Annuqayah Latee</span>
+        <!-- BEGIN: PartnerTrustBar -->
+        <section class="border-y border-slate-200/80 bg-white py-8 reveal">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-wrap items-center justify-between gap-8">
+                    <div class="flex items-center gap-4 bg-slate-50 px-4 py-2 rounded-full border border-slate-200">
+                        <span class="text-xs font-semibold text-slate-500">Ikuti</span>
+                        <div class="flex items-center gap-3 text-slate-700">
+                            <a aria-label="Facebook" class="hover:text-emerald-600 hover:-translate-y-1 transition-all duration-300" href="#"><svg class="w-3.5 h-3.5 fill-currentColor" viewbox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.592 9 4.825V8z"></path></svg></a>
+                            <a aria-label="Instagram" class="hover:text-emerald-600 hover:-translate-y-1 transition-all duration-300" href="#"><svg class="w-3.5 h-3.5 fill-currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
                         </div>
                     </div>
-                @endforeach
-            </div>
-        </section>
-
-        <section class="welcome-fit" id="profil">
-            <div class="welcome-container fit-grid">
-                <div class="fit-art welcome-reveal" x-data="{ shown: false }" x-intersect.once="shown = true"
-                    :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }">
-                    <img src="{{ asset('images/pesantren/masjid.jpg') }}"
-                        alt="Masjid di lingkungan Pondok Pesantren Annuqayah Latee" loading="lazy" width="1024"
-                        height="569">
-                </div>
-                <div class="fit-copy welcome-reveal" x-data="{ shown: false }" x-intersect.once="shown = true"
-                    :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }">
-                    <span class="welcome-pill">Sejarah & profil</span>
-                    <h2>Merawat tradisi.<br><span>Mengembangkan ilmu.</span></h2>
-                    <p>KH. Abdullah Sajjad mendirikan Annuqayah Latee pada 1923. Beliau adalah putra KH. Muhammad
-                        Syarqawi, pendiri Pondok Pesantren Annuqayah.</p>
-                    <div class="fit-checks">
-                        @foreach (['Pendidikan berakar pada tradisi keilmuan pesantren.', 'Pembelajaran Al-Qur’an dan kitab kuning.', 'Pembentukan ketakwaan dan kedalaman ilmu agama.', 'Pengamalan Ahlussunnah Wal Jamaah an-Nahdliyyah.'] as $value)
-                            <div class="welcome-text-link"><span class="logo-period"
-                                    aria-hidden="true">✓</span><span>{{ $value }}</span></div>
-                        @endforeach
+                    <div class="flex flex-wrap items-center gap-8 md:gap-14 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 font-semibold text-lg tracking-tight text-slate-800">
+                        <span class="flex items-center gap-1.5 hover:text-emerald-600 transition-colors cursor-default"><span class="text-xl">🕌</span> Latee Putra</span>
+                        <span class="text-lg font-bold hover:text-emerald-600 transition-colors cursor-default">Latee I Putri</span>
+                        <span class="text-lg font-semibold tracking-wide hover:text-emerald-600 transition-colors cursor-default">Latee II Putri</span>
                     </div>
-                    <p>Pengajaran sorogan, wetonan, dan bandongan menjadi bagian dari perjalanan pendidikan Latee, yang
-                        kemudian berkembang melalui madrasah dan pengajian.</p><a class="welcome-button"
-                        href="https://pp.annuqayahlatee.id/tentang/">Baca profil lengkap <span>↗</span></a>
                 </div>
             </div>
         </section>
 
-        <section class="welcome-section welcome-container" id="pendidikan">
-            <div class="welcome-section-heading align-left welcome-reveal" x-data="{ shown: false }"
-                x-intersect.once="shown = true"
-                :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }"><span
-                    class="welcome-pill">Pendidikan pesantren</span>
-                <h2>Menimba ilmu.<br><span>Membentuk pribadi santri.</span></h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-phone welcome-reveal" x-data="{ shown: false }" x-intersect.once="shown = true"
-                    :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }">
-                    <img src="{{ asset('images/pesantren/santri.jpg') }}"
-                        alt="Santri Annuqayah Latee dalam dokumentasi pesantren" loading="lazy" width="1024"
-                        height="569">
+        <!-- BEGIN: Unit Pendidikan -->
+        <section class="py-20 bg-slate-50" id="pendidikan">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4 reveal">
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Unit Pendidikan</h2>
+                        <p class="text-slate-500 text-sm mt-1">Lembaga pendidikan formal dan diniyah di lingkungan Annuqayah Latee</p>
+                    </div>
                 </div>
-                <div class="service-stack">
-                    <article class="service-card light welcome-reveal" x-data="{ shown: false }"
-                        x-intersect.once="shown = true"
-                        :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }">
-                        <span class="service-index">01 / MADRASAH</span>
-                        <h3>Madrasah Diniyah</h3>
-                        <p>Pendidikan klasikal Madrasah Diniyah Annuqayah Latee dimulai pada 1 Agustus 1983 atas
-                            prakarsa KH. Ahmad Basyir AS.</p>
-                        <ul>
-                            <li>Tingkat persiapan Isti’dadi dan enam kelas Ibtida’i.</li>
-                            <li>Kajian akidah, akhlak, fikih, dan ilmu bahasa.</li>
-                            <li>Penguatan hafalan dan pembahasan persoalan keagamaan.</li>
-                        </ul>
-                    </article>
-                    <article class="service-card welcome-reveal" x-data="{ shown: false }"
-                        x-intersect.once="shown = true"
-                        :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }">
-                        <span class="service-index">02 / PENGAJIAN</span>
-                        <h3>Al-Qur’an & kitab</h3>
-                        <p>Pembelajaran membaca Al-Qur’an berjalan beriringan dengan pendalaman kitab turats.</p>
-                        <ul>
-                            <li>Bimbingan Tilawati untuk santri baru.</li>
-                            <li>Majelis santri lama berjenjang sesuai kemampuan.</li>
-                            <li>Pengajian kitab selepas Subuh dan Asar.</li>
-                        </ul>
-                    </article>
-                </div>
-                <div class="service-stack service-secondary">
-                    <article class="service-card tinted welcome-reveal" x-data="{ shown: false }"
-                        x-intersect.once="shown = true"
-                        :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }">
-                        <span class="service-index">03 / DASAR IBADAH</span>
-                        <h3>Madrasah SKIA</h3>
-                        <p>Santri baru mempelajari dasar akidah, fikih, akhlak, tajwid, dan amaliah sehari-hari selama
-                            satu tahun pelajaran.</p>
-                    </article>
-                    <article class="service-card welcome-reveal" x-data="{ shown: false }"
-                        x-intersect.once="shown = true"
-                        :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }">
-                        <span class="service-index">04 / PRAKTIK</span>
-                        <h3>Ilmu yang diamalkan</h3>
-                        <p>Pembelajaran dilengkapi praktik wudu, salat, dan pengurusan jenazah untuk memperkuat
-                            kecakapan ibadah santri.</p><a class="welcome-text-link"
-                            href="https://pp.annuqayahlatee.id/program/pendidikan/">Selengkapnya tentang pendidikan
-                            <span>↗</span></a>
-                    </article>
-                </div>
-                <div class="service-website welcome-reveal" x-data="{ shown: false }" x-intersect.once="shown = true"
-                    :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }">
-                    <img src="{{ asset('images/pesantren/kitab.jpg') }}"
-                        alt="Kitab sebagai bagian dari tradisi belajar pesantren" loading="lazy" width="1024"
-                        height="637">
-                </div>
-            </div>
-            <div class="expertise-grid">
-                @foreach ([['⌘', 'Peminatan', 'Ruang kegiatan untuk mengembangkan bakat dan minat santri.', 'latee-i-putri/peminatan/'], ['◈', 'Perpustakaan', 'Publikasi dan layanan bacaan untuk mendukung kegiatan santri.', 'latee-i-putri/publikasi-dan-perpustakaan/'], ['⌁', 'Lingkungan', 'Perawatan kesehatan santri dan kebersihan lingkungan pesantren.', 'latee-i-putri/kesehatan-dan-lingkungan-hidup/'], ['↗', 'Konseling', 'Pendampingan santri, ketertiban, dan keamanan kehidupan pondok.', 'latee-i-putri/ketertiban-dan-konseling/']] as [$icon, $title, $copy, $url])
-                    <article class="welcome-reveal" x-data="{ shown: false }" x-intersect.once="shown = true"
-                        :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }"
-                        style="--reveal-delay: {{ $loop->index * 80 }}ms"><span class="expertise-icon icon-ring"
-                            aria-hidden="true">{{ $icon }}</span>
-                        <h3><a href="https://pp.annuqayahlatee.id/{{ $url }}">{{ $title }}</a></h3>
-                        <p>{{ $copy }}</p>
-                    </article>
-                @endforeach
-            </div>
-        </section>
-
-        <section class="welcome-section welcome-method" id="pendaftaran">
-            <div class="welcome-container method-grid">
-                <div class="method-heading welcome-reveal" x-data="{ shown: false }" x-intersect.once="shown = true"
-                    :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }">
-                    <span class="welcome-pill">Santri baru</span>
-                    <h2>Memulai perjalanan<br>belajar di<br><span>Annuqayah Latee.</span></h2>
-                    <p>Persyaratan dan tahapan mengikuti ketentuan masing-masing kompleks.</p><a
-                        class="welcome-text-link" href="https://pp.annuqayahlatee.id/santri-baru/">Lihat panduan resmi
-                        <span>↗</span></a>
-                </div>
-                <div class="method-steps">
-                    @foreach ([['Pilih kompleks', 'Baca panduan untuk Latee Putra, Latee I Putri, atau Latee II Putri.'], ['Siapkan dokumen', 'Persiapkan salinan Kartu Keluarga serta foto dan dokumen tambahan sesuai kompleks tujuan.'], ['Lengkapi administrasi', 'Ikuti prosedur pengasuh dan sekretariat, isi formulir serta surat pernyataan, lalu selesaikan pembayaran yang ditetapkan.'], ['Ikuti pembinaan', 'Tempati kamar sesuai arahan pengurus. Santri baru Latee Putra mengikuti Bimbingan dan Pembinaan Santri Baru (Binasabar).']] as [$title, $copy])
-                        <article class="welcome-reveal" x-data="{ shown: false }" x-intersect.once="shown = true"
-                            :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }"
-                            style="--reveal-delay: {{ $loop->index * 80 }}ms"><span
-                                class="step-number">0{{ $loop->iteration }}</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <article class="reveal delay-100 bg-white rounded-3xl overflow-hidden p-3.5 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                        <div class="relative h-60 rounded-2xl overflow-hidden">
+                            <img alt="Madrasah Diniyah" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" src="https://images.unsplash.com/photo-1585036156171-384164a8c675?q=80&w=800&auto=format&fit=crop" />
+                        </div>
+                        <div class="p-4 flex items-center justify-between">
                             <div>
-                                <h3>{{ $title }}</h3>
-                                <p>{{ $copy }}</p>
+                                <h3 class="font-bold text-slate-900 text-lg group-hover:text-emerald-600 transition-colors">Madrasah Diniyah</h3>
+                                <p class="text-xs text-slate-500 flex items-center gap-1 mt-1">Tingkat Isti'dadi & Awwaliyah</p>
                             </div>
-                        </article>
-                    @endforeach
+                            <span class="bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">Ula</span>
+                        </div>
+                    </article>
+                    <!-- Card 2 -->
+                    <article class="reveal delay-200 bg-white rounded-3xl overflow-hidden p-3.5 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                        <div class="relative h-60 rounded-2xl overflow-hidden">
+                            <img alt="Tahfidhul Quran" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?q=80&w=800&auto=format&fit=crop" />
+                        </div>
+                        <div class="p-4 flex items-center justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-900 text-lg group-hover:text-emerald-600 transition-colors">Tahfidhul Quran</h3>
+                                <p class="text-xs text-slate-500 flex items-center gap-1 mt-1">Program Hafalan Wajib</p>
+                            </div>
+                            <span class="bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">Qur'an</span>
+                        </div>
+                    </article>
+                    <!-- Card 3 -->
+                    <article class="reveal delay-300 bg-white rounded-3xl overflow-hidden p-3.5 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                        <div class="relative h-60 rounded-2xl overflow-hidden">
+                            <img alt="Lembaga Dua Bahasa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" />
+                        </div>
+                        <div class="p-4 flex items-center justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-900 text-lg group-hover:text-emerald-600 transition-colors">Lembaga Dua Bahasa</h3>
+                                <p class="text-xs text-slate-500 flex items-center gap-1 mt-1">Arab & Inggris</p>
+                            </div>
+                            <span class="bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">Bahasa</span>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section class="welcome-section welcome-container welcome-faq" id="faq">
-            <div><span class="welcome-pill">Informasi pesantren</span>
-                <h2>Mengenal Latee<br><span>lebih dekat.</span></h2>
-                <p>Informasi bagi calon santri,<br>wali santri, dan masyarakat.</p>
-            </div>
-            <div class="faq-list">
-                @foreach ([['Di mana lokasi Annuqayah Latee?', 'Pesantren berada di Jalan Makam Pahlawan, Kompleks Pondok Pesantren Annuqayah, Guluk-Guluk, Sumenep, Jawa Timur, kode pos 69463.'], ['Apakah tersedia kompleks santri putri?', 'Ya. Selain Latee Putra, terdapat kompleks Latee I Putri dan Latee II Putri.'], ['Bagaimana mendapatkan rincian biaya pendaftaran?', 'Buka tautan panduan pendaftaran resmi. Rincian biaya dan perlengkapan berbeda menurut kompleks yang dipilih.'], ['Di mana membaca berita dan karya santri?', 'Website pesantren menyediakan rubrik Rilis Berita dan Pena Santri. Tautannya tersedia di bagian kontak di bawah.']] as [$question, $answer])
-                    <div class="faq-item" x-data="{ open: false }">
-                        <h3><button type="button" class="faq-question" @click="open = !open" :aria-expanded="open"
-                                aria-controls="faq-answer-{{ $loop->index }}"
-                                id="faq-question-{{ $loop->index }}">{{ $question }}<span aria-hidden="true"
-                                    :class="{ 'is-open': open }">＋</span></button></h3>
-                        <div id="faq-answer-{{ $loop->index }}" role="region"
-                            aria-labelledby="faq-question-{{ $loop->index }}" x-show="open"
-                            x-collapse.duration.250ms x-cloak>
-                            <p>{{ $answer }}</p>
+        <!-- BEGIN: Alur Pendaftaran -->
+        <section class="py-20 bg-white" id="daftar">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Alur Pendaftaran Santri Baru</h2>
+                    <p class="text-slate-500 text-sm max-w-xl mx-auto mt-2">Prosedur pendaftaran santri baru di masing-masing kompleks, baik putra maupun putri meliputi alur, syarat, keuangan, dan beberapa catatan penting.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 items-center">
+                    <div class="reveal-left delay-100 bg-slate-50/70 border border-slate-100 rounded-3xl p-8 flex flex-col items-center justify-center min-h-[360px] text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
                         </div>
+                        <h3 class="text-xl font-bold text-slate-900">Ambil Formulir<br />Pendaftaran</h3>
                     </div>
-                @endforeach
+                    <div class="reveal-zoom delay-200 bg-emerald-600 text-white rounded-3xl p-8 flex flex-col items-center text-center shadow-xl shadow-emerald-500/20 relative overflow-hidden hover:scale-[1.02] transition-transform duration-300">
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                        <div class="w-full h-32 rounded-2xl overflow-hidden mb-6 relative">
+                            <img alt="Pendaftaran" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop" />
+                            <div class="absolute inset-0 bg-emerald-900/20"></div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Lengkapi<br />Berkas Persyaratan</h3>
+                        <p class="text-emerald-100 text-xs leading-relaxed max-w-xs mb-6">Siapkan dokumen seperti fotokopi KK, akta kelahiran, dan pas foto sesuai ketentuan.</p>
+                        <a class="inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase text-white hover:text-emerald-200 transition-colors group" href="#">
+                            <span>Unduh Panduan</span>
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        </a>
+                    </div>
+                    <div class="reveal-right delay-300 bg-slate-50/70 border border-slate-100 rounded-3xl p-8 flex flex-col items-center justify-center min-h-[360px] text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Verifikasi &<br />Pembayaran</h3>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section x-data="{ shown: false }" x-intersect.once="shown = true"
-            :class="{ 'reveal-pending': !shown && !reducedMotion, 'reveal-visible': shown || reducedMotion }"
-            class="welcome-cta welcome-container welcome-reveal" id="kontak"><span class="welcome-pill">PONDOK
-                PESANTREN
-                ANNUQAYAH LATEE</span>
-            <h2>Menjalin silaturahmi.<br><span>Bersama keluarga pesantren.</span></h2>
-            <p>Jln. Makam Pahlawan, Kompleks Pondok Pesantren Annuqayah<br>Guluk-Guluk, Sumenep, Jawa Timur ·
-                69463<br><a href="mailto:pesantren@annuqayahlatee.net">pesantren@annuqayahlatee.net</a></p><a
-                class="welcome-button" href="https://pp.annuqayahlatee.id/kontak/">Hubungi pesantren
-                <span>↗</span></a><a class="cta-login" href="https://pp.annuqayahlatee.id/santri-baru/">Panduan
-                pendaftaran santri baru <span>→</span></a>
-            <div class="hero-actions"><a class="cta-login" href="https://pp.annuqayahlatee.id/category/berita/">Rilis
-                    Berita ↗</a><a class="cta-login" href="https://pp.annuqayahlatee.id/category/pena-santri/">Pena
-                    Santri ↗</a><a class="cta-login" href="https://www.instagram.com/ppa.latee/">Instagram ↗</a></div>
+        <!-- BEGIN: Info Pendaftaran -->
+        <section class="py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="reveal-left lg:col-span-5 relative group">
+                        <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] bg-sky-200">
+                            <img alt="Suasana Pesantren" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=800&auto=format&fit=crop" />
+                        </div>
+                        <div class="absolute -bottom-6 left-6 bg-white rounded-2xl shadow-xl px-6 py-4 flex items-center gap-4 border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
+                            <span class="text-2xl font-black text-emerald-600">1923</span>
+                            <div class="h-8 w-px bg-slate-200"></div>
+                            <span class="text-xs text-slate-500 font-semibold leading-tight">Tahun<br />Berdiri</span>
+                        </div>
+                    </div>
+                    <div class="reveal-right delay-100 lg:col-span-7 space-y-6 pt-6 lg:pt-0">
+                        <div class="flex flex-col gap-2">
+                            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.05]">MULAI<br />PERJALANAN<br />ILMU ANDA</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs text-slate-500 leading-relaxed">
+                                <p>Pendaftaran santri baru dibuka setiap tahun ajaran. Pastikan Anda memenuhi seluruh persyaratan administratif yang telah ditentukan.</p>
+                                <p>Untuk informasi lebih lanjut, silakan hubungi kantor pesantren atau kunjungi langsung kompleks Annuqayah Latee.</p>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <a class="inline-flex items-center justify-center gap-3 w-full bg-blue-100 hover:bg-emerald-100 text-slate-900 hover:text-emerald-800 font-bold py-5 rounded-2xl transition-all duration-300 group" href="#daftar">
+                                <span class="text-base sm:text-lg">Daftar Sekarang</span>
+                                <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEGIN: About & Metrics -->
+        <section class="py-20 bg-white" id="about">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+                    <div class="reveal lg:col-span-3">
+                        <span class="text-xs font-bold tracking-widest text-slate-700 uppercase bg-slate-100 px-4 py-2 rounded-full border border-slate-200">TENTANG KAMI</span>
+                    </div>
+                    <div class="reveal delay-100 lg:col-span-9 space-y-6">
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug">
+                            Pondok Pesantren Annuqayah Latee merupakan bagian integral dari Pondok Pesantren Annuqayah Guluk-Guluk Sumenep Jawa Timur. Saat ini terbagi menjadi tiga kompleks; Latee Putra, Latee I (Putri), dan Latee II (Putri).
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-slate-500 leading-relaxed border-t border-slate-100 pt-6">
+                            <div class="border-l-2 border-emerald-500 pl-4 hover:border-emerald-600 transition-colors">
+                                Kompleks Latee Putra saat ini dihuni oleh 1.251 santri dari berbagai daerah, menggunakan sistem kepengasuhan kolektif yang dipimpin oleh KH. Abd. A'la.
+                            </div>
+                            <div class="border-l-2 border-emerald-500 pl-4 hover:border-emerald-600 transition-colors">
+                                Latee I Putri diasuh oleh KH. A. Basith AS, dibantu oleh putra-putri dan menantu beliau; Latee II Putri diasuh oleh Nyai Umamah Makkiyah.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="reveal delay-100 bg-emerald-50/60 rounded-3xl p-10 text-center border border-emerald-100 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-lg transition-all duration-300">
+                        <span class="text-5xl lg:text-6xl font-black text-emerald-600 tracking-tight">1.251</span>
+                        <span class="text-sm font-bold text-slate-800 mt-2">Santri Putra</span>
+                    </div>
+                    <div class="reveal delay-200 bg-emerald-50/60 rounded-3xl p-10 text-center border border-emerald-100 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-lg transition-all duration-300">
+                        <span class="text-5xl lg:text-6xl font-black text-emerald-600 tracking-tight">3</span>
+                        <span class="text-sm font-bold text-slate-800 mt-2">Kompleks</span>
+                    </div>
+                    <div class="reveal delay-300 bg-emerald-50/60 rounded-3xl p-10 text-center border border-emerald-100 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-lg transition-all duration-300">
+                        <span class="text-5xl lg:text-6xl font-black text-emerald-600 tracking-tight">1923</span>
+                        <span class="text-sm font-bold text-slate-800 mt-2">Tahun Berdiri</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEGIN: Fasilitas -->
+        <section class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <div class="reveal">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Fasilitas & Keunggulan</h2>
+                    <p class="text-slate-500 text-sm max-w-xl mx-auto mt-2">Berbagai sarana dan program untuk mendukung kegiatan belajar santri.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-16 text-center">
+                    <div class="reveal delay-100 flex flex-col items-center group cursor-default">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-emerald-100 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">Musalla<br />Multifungsi</h3>
+                        <p class="text-xs text-slate-500 max-w-xs leading-relaxed">Pusat kegiatan ubudiyah dan berbagai acara pesantren, mampu menampung sekitar 300 orang.</p>
+                    </div>
+                    <div class="reveal delay-200 flex flex-col items-center group cursor-default">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-emerald-100 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">Bimbingan<br />Konseling</h3>
+                        <p class="text-xs text-slate-500 max-w-xs leading-relaxed">Satgas BK memberikan solusi psikologis dan tempat curhat yang nyaman bagi santri.</p>
+                    </div>
+                    <div class="reveal delay-300 flex flex-col items-center group cursor-default">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-emerald-100 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">Pengembangan<br />Minat & Bakat</h3>
+                        <p class="text-xs text-slate-500 max-w-xs leading-relaxed">Program seperti Tata Boga, Club Cinta Shalawat, dan komunitas menulis Café Latte 52.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEGIN: News & Blog -->
+        <section class="py-20 bg-white" id="berita">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="reveal flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Berita & Artikel</h2>
+                        <p class="text-slate-500 text-sm mt-1">Informasi terkini dan tulisan seputar Annuqayah Latee</p>
+                    </div>
+                    <a href="{{ route('blogs.index') }}" class="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors group">
+                        <span>Lihat Semua</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <article class="reveal delay-100 bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                        <div class="relative h-60 overflow-hidden">
+                            <img alt="Kegiatan Pesantren" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1585036156171-384164a8c675?q=80&w=800&auto=format&fit=crop" />
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-emerald-700 shadow-sm border border-emerald-100">BERITA</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-[11px] font-semibold text-slate-400 mb-2">12 Oktober 2024</span>
+                            <h3 class="text-lg font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors line-clamp-2">Peringatan Haul Masyayikh ke-XX Berlangsung Khidmat</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed mb-4 line-clamp-3">Ribuan santri dan alumni memadati area pesantren untuk mengikuti rangkaian acara haul yang dipenuhi dengan pembacaan manaqib dan tausiyah...</p>
+                            <a href="{{ route('blogs.show') }}" class="mt-auto inline-flex items-center gap-1 text-xs font-bold text-slate-900 hover:text-emerald-600 transition-colors">Baca Selengkapnya <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a>
+                        </div>
+                    </article>
+                    <article class="reveal delay-200 bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                        <div class="relative h-60 overflow-hidden">
+                            <img alt="Prestasi Santri" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" />
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-emerald-700 shadow-sm border border-emerald-100">BERITA</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-[11px] font-semibold text-slate-400 mb-2">10 Oktober 2024</span>
+                            <h3 class="text-lg font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors line-clamp-2">Santri Latee Raih Juara 1 Lomba Pidato Bahasa Arab Tingkat Provinsi</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed mb-4 line-clamp-3">Prestasi membanggakan kembali ditorehkan oleh santri Pondok Pesantren Annuqayah Latee dalam ajang kompetisi bahasa tingkat Jawa Timur...</p>
+                            <a href="{{ route('blogs.show') }}" class="mt-auto inline-flex items-center gap-1 text-xs font-bold text-slate-900 hover:text-emerald-600 transition-colors">Baca Selengkapnya <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a>
+                        </div>
+                    </article>
+                    <article class="reveal delay-300 bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                        <div class="relative h-60 overflow-hidden">
+                            <img alt="Artikel Edukasi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop" />
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-blue-700 shadow-sm border border-blue-100">BLOG</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-[11px] font-semibold text-slate-400 mb-2">05 Oktober 2024</span>
+                            <h3 class="text-lg font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors line-clamp-2">Menumbuhkan Jiwa Kepemimpinan Santri Melalui LDK</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed mb-4 line-clamp-3">Latihan Dasar Kepemimpinan (LDK) menjadi wadah bagi santri untuk mengasah kemampuan manajerial, public speaking, dan kerja sama tim...</p>
+                            <a href="{{ route('blogs.show') }}" class="mt-auto inline-flex items-center gap-1 text-xs font-bold text-slate-900 hover:text-emerald-600 transition-colors">Baca Selengkapnya <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEGIN: Testimonials -->
+        <section class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="reveal text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Serambi Pengasuh</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                    <div class="reveal-left delay-100 bg-white border border-slate-200 rounded-3xl p-8 flex flex-col justify-between shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div>
+                            <div class="flex gap-1 text-emerald-600 mb-4 text-xl">“</div>
+                            <p class="text-sm text-slate-600 leading-relaxed italic">"Semuanya kembali kepada akhlak. Baik agama maupun ilmu dan lainnya kembali kepada akhlak. Ilmu tanpa akhlak tidak ada gunanya."</p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-6 mt-6 border-t border-slate-100">
+                            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">A</div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900">KH. Ahmad Basyir AS</h4>
+                                <p class="text-[11px] text-slate-500 font-medium">Pengasuh</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal-zoom delay-200 bg-white border-2 border-emerald-500 rounded-3xl p-8 flex flex-col justify-between shadow-lg relative transform md:-translate-y-2 hover:shadow-emerald-500/20 transition-shadow duration-300">
+                        <div>
+                            <div class="flex gap-1 text-emerald-600 mb-4 text-xl">“</div>
+                            <p class="text-sm text-slate-600 leading-relaxed italic">"Menuntut ilmu agama adalah sesuatu yang harus dilakukan setiap muslim laki-laki atau perempuan, dan ia juga merupakan keyakinan yang harus ada dalam pemikiran kehidupan."</p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-6 mt-6 border-t border-slate-100 bg-emerald-600 -mx-8 -mb-8 p-6 rounded-b-[22px] text-white">
+                            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold text-white">B</div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">KH. A. Basith AS</h4>
+                                <p class="text-[11px] text-emerald-100 font-medium">Pengasuh Latee I Putri</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal-right delay-300 bg-white border border-slate-200 rounded-3xl p-8 flex flex-col justify-between shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div>
+                            <div class="flex gap-1 text-emerald-600 mb-4 text-xl">“</div>
+                            <p class="text-sm text-slate-600 leading-relaxed italic">"Dengan selalu ingat Allah, maka apapun hasilnya kita tetap tegar. Kalau kita berhasil kita tidak lupa daratan, kalau kita gagal kita tidak putus asa."</p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-6 mt-6 border-t border-slate-100">
+                            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">A</div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900">KH. Abd. A'la</h4>
+                                <p class="text-[11px] text-slate-500 font-medium">Pengasuh Latee Putra</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEGIN: CTA Badge Bar -->
+        <section class="py-12 bg-white border-t border-slate-200/80">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="reveal flex flex-col md:flex-row items-center justify-between gap-8 bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="flex items-center gap-4">
+                        <div class="w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-white shadow-md">
+                            <img alt="Ikon" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1585036156171-384164a8c675?q=80&w=200&auto=format&fit=crop" />
+                        </div>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-black text-slate-900">Bergabunglah<br />Bersama Kami!</h3>
+                        </div>
+                    </div>
+                    <div class="relative w-20 h-20 shrink-0 flex items-center justify-center group cursor-pointer">
+                        <svg class="w-20 h-20 animate-[spin_10s_linear_infinite] text-slate-800" viewbox="0 0 100 100">
+                            <path d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" id="circlePath"></path>
+                            <text font-size="10" font-weight="700" letter-spacing="2"><textpath class="fill-slate-900 uppercase" href="#circlePath">Daftar • Daftar •</textpath></text>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5 text-slate-900 transform -rotate-45" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 max-w-sm">
+                        <p class="text-xs text-slate-500 leading-relaxed">Informasi lebih lanjut mengenai pendaftaran dapat menghubungi kantor pesantren.</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer class="welcome-footer welcome-container"><a href="{{ route('home') }}" class="welcome-logo"
-            aria-label="Annuqayah Latee"><span class="logo-star" aria-hidden="true">✳</span> latee<span
-                class="logo-period">.</span></a>
-        <p>© {{ date('Y') }} Pondok Pesantren Annuqayah Latee · <a href="https://pp.annuqayahlatee.id/">Sumber
-                informasi</a></p><a href="#main">Kembali ke atas ↑</a>
+    <!-- BEGIN: MainFooter -->
+    <footer class="bg-white border-t border-slate-200 pt-16 pb-12" id="contact">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-100">
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white font-bold">
+                            <svg class="w-4 h-4 text-emerald-500 transform -rotate-45" fill="currentColor" viewbox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"></path></svg>
+                        </div>
+                        <span class="font-black tracking-wider text-xl text-slate-900">ANNUQAYAH LATEE</span>
+                    </div>
+                    <p class="text-xs text-slate-500 max-w-xs leading-relaxed">Jln. Makam Pahlawan Kompleks Pondok Pesantren Annuqayah Guluk-Guluk Sumenep Jawa Timur Pos: 69463</p>
+                    <p class="text-xs text-slate-500">Email: pesantren@annuqayahlatee.net</p>
+                    <div class="flex items-center gap-3 pt-2 text-slate-600">
+                        <a aria-label="Facebook" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors duration-300" href="#"><svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.592 9 4.825V8z"></path></svg></a>
+                        <a aria-label="Instagram" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors duration-300" href="#"><svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-4">Tautan</h4>
+                    <ul class="space-y-2.5 text-xs text-slate-500 font-medium">
+                        <li><a class="hover:text-emerald-600 transition-colors" href="#about">Profil</a></li>
+                        <li><a class="hover:text-emerald-600 transition-colors" href="">Pendidikan</a></li>
+                        <li><a class="hover:text-emerald-600 transition-colors" href="#berita">Berita</a></li>
+                        <li><a class="hover:text-emerald-600 transition-colors" href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-4">Kompleks</h4>
+                    <ul class="space-y-2.5 text-xs text-slate-500 font-medium">
+                        <li><a class="hover:text-emerald-600 transition-colors" href="#">Latee Putra</a></li>
+                        <li><a class="hover:text-emerald-600 transition-colors" href="#">Latee I Putri</a></li>
+                        <li><a class="hover:text-emerald-600 transition-colors" href="#">Latee II Putri</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-4">Lainnya</h4>
+                    <ul class="space-y-2.5 text-xs text-slate-500 font-medium">
+                        <li><a class="hover:text-emerald-600 transition-colors" href="#daftar">Pendaftaran</a></li>
+                        <li><a class="hover:text-emerald-600 transition-colors" href="#">Galeri</a></li>
+                        <li><a class="hover:text-emerald-600 transition-colors" href="#contact">Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 text-center text-[11px] text-slate-400">
+                © 2024 Pondok Pesantren Annuqayah Latee. All Rights Reserved.
+            </div>
+        </div>
     </footer>
 
-    {{-- ===================== FLOATING THEME TOGGLE ===================== --}}
-    <button type="button" class="welcome-theme-toggle"
-        @click="toggleTheme"
-        :aria-pressed="theme === 'dark'"
-        :aria-label="themeLabel"
-        :title="themeLabel">
-        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-            aria-hidden="true">
-            <circle cx="12" cy="12" r="4" />
-            <path stroke-linecap="round"
-                d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
-        </svg>
-        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-            aria-hidden="true">
-            <path stroke-linejoin="round" d="M20.5 13.2A8.5 8.5 0 0 1 10.8 3.5a8.5 8.5 0 1 0 9.7 9.7Z" />
-        </svg>
-    </button>
-
+    <!-- SCRIPT UNTUK SCROLL ANIMATION (IN & OUT) -->
     <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('welcomePage', () => ({
-                menuOpen: false,
-                scrolled: false,
-                activeTab: 0,
-                ready: false,
-                desktop: window.matchMedia('(min-width: 701px)').matches,
-                reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-                pageVisible: !document.hidden,
-                cleanup: [],
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Muncul saat 15% elemen terlihat
+            };
 
-                // Satu sumber kebenaran untuk tema: Flux
-                get theme() {
-                    return this.$flux?.appearance === 'dark' ? 'dark' : 'light';
-                },
-                get themeLabel() {
-                    return this.theme === 'dark' ? 'Ganti ke mode terang' : 'Ganti ke mode gelap';
-                },
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animasi Masuk (In)
+                        entry.target.classList.add('is-visible');
+                        entry.target.classList.remove('is-hidden-up');
+                    } else {
+                        // Animasi Keluar (Out) saat scroll melewati batas
+                        // (Hapus baris di bawah ini jika Anda ingin elemen tetap terlihat setelah muncul sekali)
+                        if (entry.boundingClientRect.top > 0) {
+                            entry.target.classList.remove('is-visible');
+                            entry.target.classList.add('is-hidden-up');
+                        }
+                    }
+                });
+            }, observerOptions);
 
-                init() {
-                    const listen = (query, update) => {
-                        const media = window.matchMedia(query);
-                        const handler = event => update(event.matches);
-                        media.addEventListener('change', handler);
-                        this.cleanup.push(() => media.removeEventListener('change', handler));
-                    };
-
-                    listen('(min-width: 701px)', value => {
-                        this.desktop = value;
-                        if (value) this.menuOpen = false;
-                    });
-                    listen('(prefers-reduced-motion: reduce)', value => {
-                        this.reducedMotion = value;
-                    });
-
-                    // Scroll state
-                    const onScroll = () => { this.scrolled = window.scrollY > 24; };
-                    window.addEventListener('scroll', onScroll, { passive: true });
-                    onScroll();
-                    this.cleanup.push(() => window.removeEventListener('scroll', onScroll));
-
-                    // Sinkronkan data-welcome-theme + theme-color dengan Flux
-                    const syncAttr = () => {
-                        const value = this.theme;
-                        document.documentElement.dataset.welcomeTheme = value;
-                        document.documentElement.style.colorScheme = value;
-                        const meta = document.querySelector('meta[name="theme-color"]');
-                        if (meta) meta.content = value === 'dark' ? '#030404' : '#f7faf8';
-                    };
-                    syncAttr();
-                    this.$watch(() => this.$flux?.appearance, syncAttr);
-
-                    this.$nextTick(() => requestAnimationFrame(() => {
-                        this.ready = true;
-                    }));
-                },
-
-                destroy() {
-                    this.cleanup.forEach(dispose => dispose());
-                },
-
-                toggleTheme() {
-                    if (!this.$flux) return;
-                    this.$flux.appearance = this.$flux.appearance === 'dark' ? 'light' : 'dark';
-                },
-
-                tabKey(event, index) {
-                    const next = {
-                        ArrowRight: (index + 1) % 3,
-                        ArrowLeft: (index + 2) % 3,
-                        Home: 0,
-                        End: 2,
-                    }[event.key];
-                    if (next === undefined) return;
-                    event.preventDefault();
-                    this.activeTab = next;
-                    this.$nextTick(() => document.getElementById('case-tab-' + next)?.focus());
-                },
-            }));
+            // Target semua elemen dengan class 'reveal', 'reveal-left', dll.
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom');
+            revealElements.forEach((el) => observer.observe(el));
         });
     </script>
-
-    @fluxScripts
 </body>
+
 </html>

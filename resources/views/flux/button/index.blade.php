@@ -23,10 +23,8 @@
 @php
 $iconLeading = $icon ??= $iconLeading;
 
-// Button should be a square if it has no text contents...
 $square ??= $slot->isEmpty() && ! ($iconLeading && $iconTrailing);
 
-// Size-up icons in square/icon-only buttons...
 $iconVariant ??= ($size === 'xs')
     ? ($square ? 'micro' : 'micro')
     : ($square ? 'mini' : 'micro');
@@ -44,9 +42,7 @@ $iconTrailingClasses = Flux::classes()
     ;
 
 $isTypeSubmitAndNotDisabledOnRender = $type === 'submit' && ! $attributes->has('disabled');
-
 $isJsMethod = str_starts_with($attributes->whereStartsWith('wire:click')->first() ?? '', '$js.');
-
 $loading ??= $loading ?? ($isTypeSubmitAndNotDisabledOnRender || $attributes->whereStartsWith('wire:click')->isNotEmpty() && ! $isJsMethod);
 
 if ($loading && $type !== 'submit' && ! $isJsMethod) {
@@ -63,39 +59,39 @@ $isColored = $color
 $classes = Flux::classes()
     ->add('relative items-center font-semibold justify-center whitespace-nowrap')
     ->add('transition-all duration-300')
+    // Focus ring aksesibel untuk kedua mode
+    ->add('focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500 focus-visible:ring-offset-white dark:focus-visible:ring-brand-400 dark:focus-visible:ring-offset-slate-900')
     ->add('disabled:opacity-50 dark:disabled:opacity-50 disabled:cursor-default disabled:pointer-events-none disabled:shadow-none')
     ->add(match ($align) {
         'start' => 'justify-start',
         'center' => 'justify-center',
         'end' => 'justify-end',
     })
-    ->add(match ($size) { // Ukuran — semua rounded-full
-        'base' => 'h-10 text-sm rounded-full gap-2' . ' ' . (
-            $square
-                ? 'w-10'
-                : ($iconLeading && $iconLeading !== '' ? 'ps-5' : 'ps-6') . ' ' . ($iconTrailing && $iconTrailing !== '' ? 'pe-5' : 'pe-6')
+    ->add(match ($size) {
+        // ✅ BASE — diperkecil dari h-10 → h-9 (w-10 → w-9)
+        'base' => 'h-9 text-sm rounded-full gap-2' . ' ' . (
+            $square ? 'w-9'
+            : ($iconLeading && $iconLeading !== '' ? 'ps-5' : 'ps-6') . ' ' . ($iconTrailing && $iconTrailing !== '' ? 'pe-5' : 'pe-6')
         ),
         'sm' => 'h-9 text-sm rounded-full gap-2' . ' ' . (
-            $square
-                ? 'w-9'
-                : ($iconLeading && $iconLeading !== '' ? 'ps-4' : 'ps-5') . ' ' . ($iconTrailing && $iconTrailing !== '' ? 'pe-4' : 'pe-5')
+            $square ? 'w-9'
+            : ($iconLeading && $iconLeading !== '' ? 'ps-4' : 'ps-5') . ' ' . ($iconTrailing && $iconTrailing !== '' ? 'pe-4' : 'pe-5')
         ),
         'xs' => 'h-8 text-xs rounded-full gap-1.5' . ' ' . (
-            $square
-                ? 'w-8'
-                : ($iconLeading && $iconLeading !== '' ? 'ps-3' : 'ps-4') . ' ' . ($iconTrailing && $iconTrailing !== '' ? 'pe-3' : 'pe-4')
+            $square ? 'w-8'
+            : ($iconLeading && $iconLeading !== '' ? 'ps-3' : 'ps-4') . ' ' . ($iconTrailing && $iconTrailing !== '' ? 'pe-3' : 'pe-4')
         ),
         'lg' => 'h-12 text-sm rounded-full gap-2.5' . ' ' . (
-            $square
-                ? 'w-12'
-                : ($iconLeading && $iconLeading !== '' ? 'ps-6' : 'ps-8') . ' ' . ($iconTrailing && $iconTrailing !== '' ? 'pe-6' : 'pe-8')
+            $square ? 'w-12'
+            : ($iconLeading && $iconLeading !== '' ? 'ps-6' : 'ps-8') . ' ' . ($iconTrailing && $iconTrailing !== '' ? 'pe-6' : 'pe-8')
         ),
     })
     ->add('inline-flex')
-    ->add($inset ? match ($size) { // Inset (padding negatif untuk alignment)
+    ->add($inset ? match ($size) {
+        // ✅ BASE — inset disesuaikan untuk h-9
         'base' => $square
-            ? Flux::applyInset($inset, top: '-mt-2.5', right: '-me-2.5', bottom: '-mb-2.5', left: '-ms-2.5')
-            : Flux::applyInset($inset, top: '-mt-2.5', right: ($iconTrailing && $iconTrailing !== '' ? '-me-5' : '-me-6'), bottom: '-mb-2.5', left: ($iconLeading && $iconLeading !== '' ? '-ms-5' : '-ms-6')),
+            ? Flux::applyInset($inset, top: '-mt-1.5', right: '-me-1.5', bottom: '-mb-1.5', left: '-ms-1.5')
+            : Flux::applyInset($inset, top: '-mt-1.5', right: ($iconTrailing && $iconTrailing !== '' ? '-me-5' : '-me-6'), bottom: '-mb-1.5', left: ($iconLeading && $iconLeading !== '' ? '-ms-5' : '-ms-6')),
         'sm' => $square
             ? Flux::applyInset($inset, top: '-mt-1.5', right: '-me-1.5', bottom: '-mb-1.5', left: '-ms-1.5')
             : Flux::applyInset($inset, top: '-mt-1.5', right: ($iconTrailing && $iconTrailing !== '' ? '-me-4' : '-me-5'), bottom: '-mb-1.5', left: ($iconLeading && $iconLeading !== '' ? '-ms-4' : '-ms-5')),
@@ -106,72 +102,73 @@ $classes = Flux::classes()
             ? Flux::applyInset($inset, top: '-mt-3', right: '-me-3', bottom: '-mb-3', left: '-ms-3')
             : Flux::applyInset($inset, top: '-mt-3', right: ($iconTrailing && $iconTrailing !== '' ? '-me-6' : '-me-8'), bottom: '-mb-3', left: ($iconLeading && $iconLeading !== '' ? '-ms-6' : '-ms-8')),
     } : '')
-    ->add(match (true) { // Background color
+    ->add(match (true) {
+        // Colored variants (custom color seperti emerald/rose/etc.)
         $isColored && $variant === 'filled' => 'bg-[color-mix(in_oklab,_var(--color-button-soft),_transparent_80%)] hover:bg-[color-mix(in_oklab,_var(--color-button-soft),_transparent_70%)] dark:bg-[color-mix(in_oklab,_var(--color-button-soft),_transparent_60%)] dark:hover:bg-[color-mix(in_oklab,_var(--color-button-soft),_transparent_50%)]',
-        $isColored && $variant === 'outline' => 'bg-white hover:bg-[color-mix(in_oklab,_var(--color-button-soft)_6%,_white)] dark:bg-zinc-700 dark:hover:bg-[color-mix(in_oklab,_var(--color-accent-content)_10%,_var(--color-zinc-700))]',
+        $isColored && $variant === 'outline' => 'bg-white hover:bg-[color-mix(in_oklab,_var(--color-button-soft)_6%,_white)] dark:bg-slate-800 dark:hover:bg-[color-mix(in_oklab,_var(--color-accent-content)_10%,_var(--color-slate-800))]',
         $isColored && $variant === 'ghost' => 'bg-transparent hover:bg-[color-mix(in_oklab,_var(--color-button-soft),_transparent_80%)] active:bg-[color-mix(in_oklab,_var(--color-button-soft),_transparent_70%)] dark:hover:bg-[color-mix(in_oklab,_var(--color-button-soft),_transparent_60%)] dark:active:bg-[color-mix(in_oklab,_var(--color-button-soft),_transparent_50%)]',
         $isColored && $variant === 'subtle' => 'bg-transparent hover:bg-(--color-button-tint) dark:hover:bg-[color-mix(in_oklab,_var(--color-button-deep),_transparent_28%)]',
         default => match ($variant) {
-            'primary' => 'bg-brand-600 hover:bg-brand-700 hover:-translate-y-0.5 shadow-lg shadow-brand-500/25',
+            'primary' => 'bg-[var(--color-accent)] hover:bg-[color-mix(in_oklab,var(--color-accent),transparent_10%)] hover:-translate-y-0.5 shadow-lg shadow-[color-mix(in_oklab,var(--color-accent),transparent_75%)]',
             'filled' => 'bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20',
-            'outline' => 'bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 dark:bg-zinc-700 dark:border-zinc-600 dark:hover:bg-zinc-600/75',
-            'danger' => 'bg-rose-600 hover:bg-rose-700 shadow-lg shadow-rose-500/25 dark:bg-rose-600 dark:hover:bg-rose-500',
-            'ghost' => 'bg-transparent hover:bg-slate-100 dark:hover:bg-white/15',
-            'subtle' => 'bg-transparent hover:bg-slate-50 dark:hover:bg-white/15',
+            'outline' => 'bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-700 dark:hover:border-slate-600',
+            'danger' => 'bg-rose-600 hover:bg-rose-700 shadow-lg shadow-rose-500/25 dark:bg-rose-500 dark:hover:bg-rose-400 dark:shadow-rose-400/20',
+            'ghost' => 'bg-transparent hover:bg-slate-100 dark:hover:bg-white/10',
+            'subtle' => 'bg-transparent hover:bg-slate-50 dark:hover:bg-white/5',
         },
     })
-    ->add(match (true) { // Text color
+    ->add(match (true) {
         $isColored && $variant === 'filled' => 'text-(--color-button-strong) dark:text-(--color-button-soft-foreground)',
         $isColored && $variant === 'outline' => 'text-(--color-button-strong) dark:text-(--color-accent-content)',
         $isColored && $variant === 'ghost' => 'text-(--color-button-strong) dark:text-(--color-button-muted)',
         $isColored && $variant === 'subtle' => 'text-[color-mix(in_oklab,_var(--color-accent-content),_var(--color-zinc-500)_46%)] hover:text-(--color-button-strong) dark:text-[color-mix(in_oklab,_var(--color-button-muted),_var(--color-zinc-400)_48%)] dark:hover:text-(--color-button-muted)',
         default => match ($variant) {
-            'primary' => 'text-white',
+            'primary' => 'text-[var(--color-accent-foreground)]',
             'filled' => 'text-slate-900 dark:text-white',
             'outline' => 'text-slate-800 dark:text-white',
             'danger' => 'text-white',
             'ghost' => 'text-slate-700 dark:text-white',
-            'subtle' => 'text-slate-500 hover:text-slate-800 dark:text-zinc-400 dark:hover:text-white',
+            'subtle' => 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white',
         },
     })
-    ->add(match (true) { // Border color
-        $isColored && $variant === 'outline' => 'border border-[color-mix(in_oklab,_var(--color-button-border)_18%,_var(--color-zinc-200))] hover:border-[color-mix(in_oklab,_var(--color-button-border)_28%,_var(--color-zinc-200))] dark:border-[color-mix(in_oklab,_var(--color-accent-content)_22%,_var(--color-zinc-600))] dark:hover:border-[color-mix(in_oklab,_var(--color-accent-content)_32%,_var(--color-zinc-600))]',
+    ->add(match (true) {
+        $isColored && $variant === 'outline' => 'border border-[color-mix(in_oklab,_var(--color-button-border)_18%,_var(--color-zinc-200))] hover:border-[color-mix(in_oklab,_var(--color-button-border)_28%,_var(--color-zinc-200))] dark:border-[color-mix(in_oklab,_var(--color-accent-content)_22%,_var(--color-slate-700))] dark:hover:border-[color-mix(in_oklab,_var(--color-accent-content)_32%,_var(--color-slate-700))]',
         default => match ($variant) {
             'primary' => '',
-            'filled' => '[[data-flux-button-group]_&]:border-e [[data-flux-button-group]_&]:border-slate-200/80 dark:[[data-flux-button-group]_&]:border-zinc-900/50',
+            'filled' => '[[data-flux-button-group]_&]:border-e [[data-flux-button-group]_&]:border-slate-200/80 dark:[[data-flux-button-group]_&]:border-slate-900/50',
             'outline' => '',
             'danger' => '[[data-flux-button-group]_&]:border-e [[data-flux-button-group]_&]:border-rose-700 dark:[[data-flux-button-group]_&]:border-rose-900/25',
             'ghost' => '',
             'subtle' => '',
         },
     })
-    ->add(match ($variant) { // Shadows
+    ->add(match ($variant) {
         'primary' => '',
         'danger' => '',
         'outline' => 'shadow-xs',
         default => '',
     })
-    ->add(match ($variant) { // Grouped border treatments
+    ->add(match ($variant) {
         'ghost' => '',
         'subtle' => '',
         'outline' => '[[data-flux-button-group]_&]:border-s-0 [:is([data-flux-button-group]>&:first-child,_[data-flux-button-group]_:first-child>&)]:border-s-[1px]',
-        'filled' => '[[data-flux-button-group]_&]:border-e [:is([data-flux-button-group]>&:last-child,_[data-flux-button-group]_:last-child>&)]:border-e-0 [[data-flux-button-group]_&]:border-slate-200/80 dark:[[data-flux-button-group]_&]:border-zinc-900/50',
+        'filled' => '[[data-flux-button-group]_&]:border-e [:is([data-flux-button-group]>&:last-child,_[data-flux-button-group]_:last-child>&)]:border-e-0 [[data-flux-button-group]_&]:border-slate-200/80 dark:[[data-flux-button-group]_&]:border-slate-900/50',
         'danger' => '[[data-flux-button-group]_&]:border-e [:is([data-flux-button-group]>&:last-child,_[data-flux-button-group]_:last-child>&)]:border-e-0 [[data-flux-button-group]_&]:border-rose-700 dark:[[data-flux-button-group]_&]:border-rose-900/25',
         'primary' => '[[data-flux-button-group]_&]:border-e-0 [:is([data-flux-button-group]>&:last-child,_[data-flux-button-group]_:last-child>&)]:border-e-[1px] dark:[:is([data-flux-button-group]>&:last-child,_[data-flux-button-group]_:last-child>&)]:border-e-0 [:is([data-flux-button-group]>&:not(:first-child),_[data-flux-button-group]_:not(:first-child)>&)]:border-s-[1px]! [:is([data-flux-button-group]>&:not(:first-child),_[data-flux-button-group]_:not(:first-child)>&)]:border-s-white/20',
         default => '',
     })
-    ->add($loading ? [ // Loading states
+    ->add($loading ? [
         '*:transition-opacity',
         $type === 'submit' ? '[&[disabled]>:not([data-flux-loading-indicator])]:opacity-0' : '[&[data-loading]>:not([data-flux-loading-indicator])]:opacity-0 [&[data-flux-loading]>:not([data-flux-loading-indicator])]:opacity-0',
         $type === 'submit' ? '[&[disabled]>[data-flux-loading-indicator]]:opacity-100' : '[&[data-loading]>[data-flux-loading-indicator]]:opacity-100 [&[data-flux-loading]>[data-flux-loading-indicator]]:opacity-100',
         $type === 'submit' ? '[&[disabled]]:pointer-events-none' : 'data-loading:pointer-events-none data-flux-loading:pointer-events-none',
     ] : [])
     ->add(($variant === 'primary' || $isColored) ? match ($color) {
-        'slate' => '[--color-accent:var(--color-slate-800)] [--color-accent-content:var(--color-slate-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-white)] dark:[--color-accent-content:var(--color-white)] dark:[--color-accent-foreground:var(--color-slate-800)]',
-        'gray' => '[--color-accent:var(--color-gray-800)] [--color-accent-content:var(--color-gray-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-white)] dark:[--color-accent-content:var(--color-white)] dark:[--color-accent-foreground:var(--color-gray-800)]',
-        'zinc' => '[--color-accent:var(--color-zinc-800)] [--color-accent-content:var(--color-zinc-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-white)] dark:[--color-accent-content:var(--color-white)] dark:[--color-accent-foreground:var(--color-zinc-800)]',
-        'neutral' => '[--color-accent:var(--color-neutral-800)] [--color-accent-content:var(--color-neutral-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-white)] dark:[--color-accent-content:var(--color-white)] dark:[--color-accent-foreground:var(--color-neutral-800)]',
-        'stone' => '[--color-accent:var(--color-stone-800)] [--color-accent-content:var(--color-stone-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-white)] dark:[--color-accent-content:var(--color-white)] dark:[--color-accent-foreground:var(--color-stone-800)]',
+        'slate' => '[--color-accent:var(--color-slate-800)] [--color-accent-content:var(--color-slate-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-slate-100)] dark:[--color-accent-content:var(--color-slate-100)] dark:[--color-accent-foreground:var(--color-slate-900)]',
+        'gray' => '[--color-accent:var(--color-gray-800)] [--color-accent-content:var(--color-gray-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-gray-100)] dark:[--color-accent-content:var(--color-gray-100)] dark:[--color-accent-foreground:var(--color-gray-900)]',
+        'zinc' => '[--color-accent:var(--color-zinc-800)] [--color-accent-content:var(--color-zinc-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-zinc-100)] dark:[--color-accent-content:var(--color-zinc-100)] dark:[--color-accent-foreground:var(--color-zinc-900)]',
+        'neutral' => '[--color-accent:var(--color-neutral-800)] [--color-accent-content:var(--color-neutral-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-neutral-100)] dark:[--color-accent-content:var(--color-neutral-100)] dark:[--color-accent-foreground:var(--color-neutral-900)]',
+        'stone' => '[--color-accent:var(--color-stone-800)] [--color-accent-content:var(--color-stone-800)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-stone-100)] dark:[--color-accent-content:var(--color-stone-100)] dark:[--color-accent-foreground:var(--color-stone-900)]',
         'brand' => '[--color-accent:var(--color-brand-600)] [--color-accent-content:var(--color-brand-600)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-brand-500)] dark:[--color-accent-content:var(--color-brand-400)] dark:[--color-accent-foreground:var(--color-white)]',
         'red' => '[--color-accent:var(--color-red-500)] [--color-accent-content:var(--color-red-600)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-red-500)] dark:[--color-accent-content:var(--color-red-400)] dark:[--color-accent-foreground:var(--color-white)]',
         'rose' => '[--color-accent:var(--color-rose-500)] [--color-accent-content:var(--color-rose-600)] [--color-accent-foreground:var(--color-white)] dark:[--color-accent:var(--color-rose-500)] dark:[--color-accent-content:var(--color-rose-400)] dark:[--color-accent-foreground:var(--color-white)]',
@@ -195,10 +192,9 @@ $classes = Flux::classes()
     } : '')
     ;
 
-    // Exempt subtle and ghost buttons from receiving border roundness overrides from button.group...
-    $attributes = $attributes->merge([
-        'data-flux-group-target' => ! in_array($variant, ['subtle', 'ghost']),
-    ]);
+$attributes = $attributes->merge([
+    'data-flux-group-target' => ! in_array($variant, ['subtle', 'ghost']),
+]);
 @endphp
 
 <flux:with-tooltip :$attributes>
@@ -222,7 +218,7 @@ $classes = Flux::classes()
         <?php endif; ?>
 
         <?php if ($kbd): ?>
-            <div class="text-xs text-zinc-400 dark:text-zinc-400">{{ $kbd }}</div>
+            <div class="text-xs text-slate-400 dark:text-slate-500">{{ $kbd }}</div>
         <?php endif; ?>
 
         <?php if (is_string($iconTrailing) && $iconTrailing !== ''): ?>

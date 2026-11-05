@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Kenali Pondok Pesantren Annuqayah Latee, Guluk-Guluk, Sumenep: profil, kompleks putra dan putri, pendidikan, serta informasi pendaftaran santri baru.">
-    <meta name="theme-color" content="#030404">
+    {{-- <meta name="theme-color" content="#030404"> --}}
     <title>Pondok Pesantren Annuqayah Latee — P2AL</title>
     <link rel="icon" href="{{ asset('images/pesantren/logo.png') }}" type="image/png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Manrope:wght@400..800&display=swap" rel="stylesheet">
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @fluxAppearance
 </head>
@@ -448,6 +447,7 @@
 
     <!-- BEGIN: MainFooter -->
     @include('partials.footer')
+    @fluxScripts
 
     <!-- Script Reveal -->
     <script>

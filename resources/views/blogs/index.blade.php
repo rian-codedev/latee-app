@@ -131,12 +131,11 @@
 
                     <!-- Sort -->
                     <div class="w-full md:w-auto">
-                        <select name="sort" onchange="this.form.submit()"
-                            class="w-full md:w-auto px-4 py-2.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 focus:border-brand-500 outline-none cursor-pointer transition-colors">
-                            <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>Terbaru</option>
-                            <option value="oldest" {{ request('sort') === 'oldest' ? 'selected' : '' }}>Terlama</option>
-                            <option value="popular" {{ request('sort') === 'popular' ? 'selected' : '' }}>Terpopuler</option>
-                        </select>
+                        <flux:select name="sort" onchange="this.form.submit()">
+                            <flux:select.option value="latest">Terbaru</flux:select.option>
+                            <flux:select.option value="oldest">Terlama</flux:select.option>
+                            <flux:select.option value="popular">Terpopuler</flux:select.option>
+                        </flux:select>
                         <button type="submit" class="hidden">Cari</button>
                     </div>
                 </form>

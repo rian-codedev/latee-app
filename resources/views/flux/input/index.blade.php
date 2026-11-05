@@ -1,7 +1,5 @@
-@blaze(fold: true, unsafe: [
-    // attributes
+@blaze(fold: false, unsafe: [
     'icon:trailing', 'icon:leading', 'icon:variant', 'mask:dynamic',
-    // flux:with-field props
     'name', 'label', 'badge',
     'description', 'description:trailing',
     'label:badge', 'label:aside', 'label:trailing',
@@ -17,6 +15,7 @@
     'name' => $attributes->whereStartsWith('wire:model')->first(),
     'iconVariant' => 'mini',
     'variant' => 'outline',
+    'colorTheme' => 'blue',
     'iconTrailing' => null,
     'iconLeading' => null,
     'maskDynamic' => null,
@@ -38,12 +37,6 @@
 
 $inputAttributes = Flux::attributesAfter('input:', $attributes, []);
 
-// There are a few loading scenarios that this covers:
-// If `:loading="false"` then never show loading.
-// If `:loading="true"` then always show loading.
-// If `:loading="foo"` then show loading when `foo` request is happening.
-// If `wire:model` then never show loading.
-// If `wire:model.live` then show loading when the `wire:model` value request is happening.
 $wireModel = $attributes->wire('model');
 $wireTarget = null;
 
@@ -72,60 +65,58 @@ $countOfTrailingIcons = collect([
 ])->filter()->count();
 
 $iconClasses = Flux::classes()
-    // When using the outline icon variant, we need to size it down to match the default icon sizes...
     ->add($iconVariant === 'outline' ? 'size-5' : '')
     ;
 
 $inputLoadingClasses = Flux::classes()
-    // When loading, we need to add some extra padding to the input to account for the loading icon...
     ->add(match ($countOfTrailingIcons) {
-        0 => 'pe-10',
-        1 => 'pe-16',
-        2 => 'pe-23',
-        3 => 'pe-30',
-        4 => 'pe-37',
-        5 => 'pe-44',
-        6 => 'pe-51',
+        0 => 'pe-10', 1 => 'pe-16', 2 => 'pe-23', 3 => 'pe-30',
+        4 => 'pe-37', 5 => 'pe-44', 6 => 'pe-51',
     })
     ;
 
 $classes = Flux::classes()
     ->add('w-full border block disabled:shadow-none dark:shadow-none')
-    ->add('appearance-none') // Without this, input[type="date"] on mobile doesn't respect w-full...
-    ->add('outline-none transition-all') // Smooth focus transitions + remove default outline
-    ->add(match ($size) { // Pill-shaped: rounded-full, padding-adjustable
-        default => 'text-sm rounded-full py-2.5',
-        'sm'    => 'text-sm rounded-full py-2',
+    ->add('appearance-none')
+    // ✅ OUTLINE + TRANSITION (persis contoh)
+    ->add('outline-none transition-all')
+    // ✅ SHADOW: `shadow` (persis contoh — bukan shadow-xs)
+    ->add('shadow')
+    ->add(match ($size) {
+        default => 'text-sm rounded-full py-2',
+        'md'    => 'text-sm rounded-full py-2.5',
         'xs'    => 'text-xs rounded-full py-1.5',
     })
-    ->add(match ($hasLeadingIcon) { // Leading padding for icon
+    ->add(match ($hasLeadingIcon) {
         true  => 'ps-11',
         false => 'ps-4',
     })
-    ->add(match ($countOfTrailingIcons) { // Trailing padding for icons
-        0 => 'pe-4',
-        1 => 'pe-10',
-        2 => 'pe-16',
-        3 => 'pe-23',
-        4 => 'pe-30',
-        5 => 'pe-37',
-        6 => 'pe-44',
+    ->add(match ($countOfTrailingIcons) {
+        0 => 'pe-4', 1 => 'pe-10', 2 => 'pe-16', 3 => 'pe-23',
+        4 => 'pe-30', 5 => 'pe-37', 6 => 'pe-44',
     })
-    ->add(match ($variant) { // Background — subtle slate, white on focus
-        'outline' => 'bg-slate-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-slate-900 disabled:bg-slate-100 dark:disabled:bg-slate-800/50',
-        'filled'  => 'bg-slate-100 dark:bg-slate-800 focus:bg-white dark:focus:bg-slate-900',
+    // BACKGROUND: default PUTIH, hover tema-50, focus kembali putih
+    ->add(match ($variant) {
+        'outline' => "bg-white dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-900 disabled:bg-slate-100 dark:disabled:bg-slate-800/50",
+        'filled'  => "bg-slate-100 dark:bg-slate-800 focus:bg-white dark:focus:bg-slate-900",
     })
-    ->add(match ($variant) { // Text color + placeholder
+    // Text + placeholder
+    ->add(match ($variant) {
         'outline' => 'text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 disabled:text-slate-400 dark:disabled:text-slate-500',
         'filled'  => 'text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400',
     })
-    ->add(match ($variant) { // Border + focus ring
-        'outline' => 'border-slate-200 dark:border-slate-700 focus:border-brand-500 dark:focus:border-brand-400 focus:ring-2 focus:ring-brand-200/50 dark:focus:ring-brand-500/20',
-        'filled'  => 'border-0 focus:ring-2 focus:ring-brand-200/50 dark:focus:ring-brand-500/20',
+    // ✅ BORDER + FOCUS — PERSIS SEPERTI CONTOH:
+    //    - border default: slate-200 / slate-700
+    //    - focus border: {color}-500
+    //    - focus ring: ring-3 + {color}-200/50, dark: {color}-500/20
+    ->add(match ($variant) {
+        'outline' => "border-slate-200 dark:border-slate-700 focus:border-{$colorTheme}-500 focus:ring-3 focus:ring-{$colorTheme}-200/50 dark:focus:ring-{$colorTheme}-500/20",
+        'filled'  => "border-0 focus:ring-3 focus:ring-{$colorTheme}-200/50 dark:focus:ring-{$colorTheme}-500/20",
     })
-    ->add(match ($variant) { // Invalid state
-        'outline' => 'data-invalid:border-red-500 dark:data-invalid:border-red-500 data-invalid:ring-2 data-invalid:ring-red-200/50 dark:data-invalid:ring-red-500/20 disabled:data-invalid:border-red-500',
-        'filled'  => 'data-invalid:border-red-500'
+    // Invalid state
+    ->add(match ($variant) {
+        'outline' => 'data-invalid:border-red-400 dark:data-invalid:border-red-400 data-invalid:ring-3 data-invalid:ring-red-300/40 dark:data-invalid:ring-red-400/30 disabled:data-invalid:border-red-400',
+        'filled'  => 'data-invalid:border-red-400'
     })
     ->add($attributes->pluck('class:input'))
     ;
@@ -139,18 +130,17 @@ $classes = Flux::classes()
     <flux:with-field :$attributes :$name>
         <div {{ $attributes->only('class')->class('w-full relative block group/input') }} data-flux-input>
             <?php if (is_string($iconLeading) && $iconLeading !== ''): ?>
-                <div class="pointer-events-none absolute top-0 bottom-0 border-s border-transparent flex items-center justify-center text-slate-400 dark:text-slate-500 ps-4 start-0">
+                <div class="pointer-events-none absolute top-0 bottom-0 border-s border-transparent flex items-center justify-center text-slate-400 dark:text-slate-500 ps-4 start-0 transition-colors group-focus-within:text-{{ $colorTheme }}-500 dark:group-focus-within:text-{{ $colorTheme }}-400">
                     <flux:icon :icon="$iconLeading" :variant="$iconVariant" :class="$iconClasses" />
                 </div>
             <?php elseif ($iconLeading): ?>
-                <div {{ $iconLeading->attributes->class('absolute top-0 bottom-0 border-s border-transparent flex items-center justify-center text-slate-400 dark:text-slate-500 ps-4 start-0') }}>
+                <div {{ $iconLeading->attributes->class("absolute top-0 bottom-0 border-s border-transparent flex items-center justify-center text-slate-400 dark:text-slate-500 ps-4 start-0 transition-colors group-focus-within:text-{$colorTheme}-500 dark:group-focus-within:text-{$colorTheme}-400") }}>
                     {{ $iconLeading }}
                 </div>
             <?php endif; ?>
 
             <input
                 type="{{ $type }}"
-                {{-- Leave file inputs unstyled... --}}
                 {{ $attributes->except('class')->class($type === 'file' ? '' : $classes)->merge($inputAttributes->getAttributes()) }}
                 <?php if (isset($name)): ?> name="{{ $name }}" <?php endif; ?>
                 <?php if ($maskDynamic): ?> x-mask:dynamic="{{ $maskDynamic }}" @elseif ($mask) x-mask="{{ $mask }}" <?php endif; ?>
@@ -171,27 +161,21 @@ $classes = Flux::classes()
                     <?php if ($loading): ?>
                         <flux:icon name="loading" :variant="$iconVariant" :class="$iconClasses" wire:loading :wire:target="$wireTarget" />
                     <?php endif; ?>
-
                     <?php if ($clearable): ?>
                         <flux:input.clearable inset="left right" :$size :$iconVariant />
                     <?php endif; ?>
-
                     <?php if ($kbd): ?>
                         <span class="pointer-events-none last:pe-2">{{ $kbd }}</span>
                     <?php endif; ?>
-
                     <?php if ($expandable): ?>
                         <flux:input.expandable inset="left right" :$size :$iconVariant />
                     <?php endif; ?>
-
                     <?php if ($copyable): ?>
                         <flux:input.copyable inset="left right" :$size :$iconVariant />
                     <?php endif; ?>
-
                     <?php if ($viewable): ?>
                         <flux:input.viewable inset="left right" :$size :$iconVariant />
                     <?php endif; ?>
-
                     <?php if (is_string($iconTrailing) && $iconTrailing !== ''): ?>
                         <?php
                             $trailingIconClasses = clone $iconClasses;
@@ -237,7 +221,7 @@ $classes = Flux::classes()
             <div class="absolute top-0 bottom-0 flex items-center justify-center text-xs text-slate-400 dark:text-slate-500 pe-4 end-0">
                 <flux:icon :icon="$iconTrailing" :variant="$iconVariant" :class="$iconClasses" />
             </div>
-        <?php elseif  ($iconTrailing): ?>
+        <?php elseif ($iconTrailing): ?>
             <div {{ $iconTrailing->attributes->class('absolute top-0 bottom-0 flex items-center justify-center text-xs text-slate-400 dark:text-slate-500 pe-3 end-0') }}>
                 {{ $iconTrailing }}
             </div>

@@ -3,7 +3,7 @@
     @include('partials.header')
 
     <main>
-        <!-- Hero Section -->
+        <!-- Page Hero -->
         <section class="relative w-full py-10 md:py-16 px-4 md:px-6 overflow-hidden flex justify-center">
             <div class="relative w-full max-w-[1400px] min-h-[300px] md:min-h-[350px] rounded-[2.5rem] overflow-hidden flex items-center shadow-2xl bg-white border border-slate-100 bg-texture-noise">
                 <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -29,7 +29,7 @@
             </div>
         </section>
 
-        <!-- Filosofi Unit Usaha -->
+        <!-- Filosofi -->
         <section class="py-16 bg-white" id="filosofi">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal bg-brand-600 text-white rounded-3xl p-8 md:p-12 shadow-xl shadow-brand-500/20">
@@ -57,10 +57,18 @@
         <!-- Daftar Unit Usaha -->
         <section class="py-20 bg-slate-50" id="daftar-unit">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="reveal mb-12 text-center">
+                <div class="reveal mb-8 text-center">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Unit Usaha</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">A Latee Business Units</h2>
                     <p class="text-slate-500 text-sm max-w-xl mx-auto mt-2">Lima unit usaha yang melayani kebutuhan santri dan masyarakat sekitar pesantren.</p>
+                </div>
+
+                <!-- GAMBAR UTAMA SECTION -->
+                <div class="reveal delay-100 mb-12 overflow-hidden rounded-3xl shadow-lg border border-slate-100 h-64 md:h-96 relative group">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop" alt="Kegiatan Unit Usaha Santri" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6 md:p-10">
+                        <p class="text-white text-sm md:text-base font-semibold max-w-2xl leading-relaxed">Unit usaha dikelola sepenuhnya oleh santri aktif sebagai laboratorium kewirausahaan syariah.</p>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">

@@ -66,7 +66,7 @@
                 </div>
 
                 <!-- Objek Gambar -->
-                <div class="relative z-20 w-[80%] max-w-sm mx-auto mt-8 lg:mt-0 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[50%] xl:w-[45%] lg:max-w-none lg:translate-x-[10%] pointer-events-none reveal-right delay-400">
+                <div class="hidden lg:block relative z-20 w-[80%] max-w-sm mx-auto mt-8 lg:mt-0 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[50%] xl:w-[45%] lg:max-w-none lg:translate-x-[10%] pointer-events-none reveal-right delay-400">
                     <div class="relative transform lg:scale-100 xl:scale-110 drop-shadow-[0_25px_25px_rgba(0,0,0,0.15)] flex justify-center animate-float">
                         <img alt="Santri Annuqayah Latee" class="w-full h-auto object-contain lg:mix-blend-multiply" src="{{ asset('images/boys.png') }}" onerror="this.src='https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop'" />
                     </div>
@@ -86,9 +86,9 @@
                         </div>
                     </div>
                     <div class="flex flex-wrap items-center gap-8 md:gap-14 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 font-semibold text-lg tracking-tight text-slate-800">
-                        <span class="flex items-center gap-1.5 hover:text-emerald-600 transition-colors cursor-default"><span class="text-xl">🕌</span> Latee Putra</span>
-                        <span class="text-lg font-bold hover:text-emerald-600 transition-colors cursor-default">Latee I Putri</span>
-                        <span class="text-lg font-semibold tracking-wide hover:text-emerald-600 transition-colors cursor-default">Latee II Putri</span>
+                        <span class="text-sm flex items-center gap-1.5 hover:text-emerald-600 transition-colors cursor-pointer">Latee Putra</span>
+                        <span class="text-sm font-bold hover:text-emerald-600 transition-colors cursor-default cursor-pointer">Latee I Putri</span>
+                        <span class="text-sm font-semibold tracking-wide hover:text-emerald-600 transition-colors cursor-default cursor-pointer">Latee II Putri</span>
                     </div>
                 </div>
             </div>

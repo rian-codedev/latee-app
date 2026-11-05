@@ -3,7 +3,7 @@
     @include('partials.header')
 
     <main>
-        <!-- BEGIN: Page Hero -->
+        <!-- Page Hero -->
         <section class="relative w-full py-10 md:py-16 px-4 md:px-6 overflow-hidden flex justify-center">
             <div class="relative w-full max-w-[1400px] min-h-[300px] md:min-h-[350px] rounded-[2.5rem] overflow-hidden flex items-center shadow-2xl bg-white border border-slate-100 bg-texture-noise">
                 <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -29,12 +29,20 @@
             </div>
         </section>
 
-        <!-- BEGIN: Hadiran 5 Waktu -->
+        <!-- Hadiran 5 Waktu -->
         <section class="py-20 bg-white" id="hadiran">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="reveal mb-12">
+                <div class="reveal mb-8">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Ubudiyah</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Hadiran 5 Waktu</h2>
+                </div>
+
+                <!-- GAMBAR UTAMA SECTION -->
+                <div class="reveal delay-100 mb-12 overflow-hidden rounded-3xl shadow-lg border border-slate-100 h-64 md:h-96 relative group">
+                    <img src="https://images.unsplash.com/photo-1584286595398-a59f21d313f5?q=80&w=1200&auto=format&fit=crop" alt="Santri Membaca Al-Quran" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6 md:p-10">
+                        <p class="text-white text-sm md:text-base font-semibold max-w-2xl leading-relaxed">“Tirakat santri Latee adalah hadiran” — kegiatan salat berjamaah dan tilawah menjadi ruh kehidupan pesantren.</p>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -74,7 +82,7 @@
             </div>
         </section>
 
-        <!-- BEGIN: Pembacaan Yasin & Tahlil -->
+        <!-- Pembacaan Yasin & Tahlil -->
         <section class="py-20 bg-slate-50" id="yasin-tahlil">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-12 text-center">
@@ -121,7 +129,7 @@
             </div>
         </section>
 
-        <!-- BEGIN: Pembacaan Shalawat Nabi -->
+        <!-- Pembacaan Shalawat Nabi -->
         <section class="py-20 bg-white" id="shalawat">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-12">
@@ -152,7 +160,7 @@
             </div>
         </section>
 
-        <!-- BEGIN: Program Tambahan (Latee II Putri) -->
+        <!-- Program Tambahan -->
         <section class="py-20 bg-slate-50" id="program-tambahan">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-12 text-center">
@@ -162,52 +170,42 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Kartu 1 -->
                     <div class="reveal delay-100 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Ayat Hirsi</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Kumpulan ayat-ayat pendek yang dibaca setiap hari sebelum salat Maghrib sekitar pukul 04.45 WIB dipandu oleh takmir atau pengurus peribadatan.</p>
                     </div>
-                    <!-- Kartu 2 -->
                     <div class="reveal delay-200 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Ayat-Ayat Pendek</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Membaca surah-surah pendek dari juz 30 setelah adzan Maghrib dan Shubuh di Mushalla Ar-Rahmah yang dipandu takmir atau pengurus peribadatan.</p>
                     </div>
-                    <!-- Kartu 3 -->
                     <div class="reveal delay-300 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Munjiyat</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Dibaca bersama setelah hadiran Maghrib setiap malam Jumat.</p>
                     </div>
-                    <!-- Kartu 4 -->
                     <div class="reveal delay-100 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Al-Kahfi</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Dibaca bersama setiap hari Jumat setelah hadiran Shubuh.</p>
                     </div>
-                    <!-- Kartu 5 -->
                     <div class="reveal delay-200 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Tahlil</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Dibaca setiap malam Jum’at setelah hadiran Isya’.</p>
                     </div>
-                    <!-- Kartu 6 -->
                     <div class="reveal delay-300 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Hataman Juz 30</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Dilaksanakan setiap minggu tepatnya setiap hari Selasa pagi sebelum jam berangkat sekolah. Format hataman, setiap blok secara bergantian setiap minggunya.</p>
                     </div>
-                    <!-- Kartu 7 -->
                     <div class="reveal delay-100 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Barzanji dan Istighasah</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Dilaksanakan setiap malam Jumat setelah membaca tahlil bersama. Dibaca secara bergiliran setiap minggu: Jumat pertama Barzanji, Jumat berikutnya Istighasah.</p>
                     </div>
-                    <!-- Kartu 8 -->
                     <div class="reveal delay-200 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Mengaji Bersama</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Setiap selesai salat Subuh kecuali hari Selasa (mengaji Yasin), seluruh santri mengaji bersama yang bacaannya dibimbing pengurus peribadatan.</p>
                     </div>
-                    <!-- Kartu 9 -->
                     <div class="reveal delay-300 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Asma’ul Husna</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Dibaca setiap setelah membaca ayat-ayat pendek sebelum hadiran Maghrib dilaksanakan.</p>
                     </div>
-                    <!-- Kartu 10 -->
                     <div class="reveal delay-400 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Siraman Rohani</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Kegiatan motivasi beribadah yang diadakan satu kali dalam satu periode, diinisiasi oleh Pengasuh PPA Latee II, dipetak sesuai tingkat sekolah formal.</p>
@@ -216,7 +214,7 @@
             </div>
         </section>
 
-        <!-- BEGIN: CTA -->
+        <!-- CTA -->
         <section class="py-16 bg-white">
             <div class="max-w-4xl mx-auto px-6 text-center reveal">
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">Bergabunglah dalam Lingkaran Ibadah</h2>

@@ -20,6 +20,30 @@ Route::name('latee.')->group(function () {
     Route::view('programs/latee/infrastruktur', 'programs.latee.infrastruktur')->name('programs.infrastruktur');
     Route::view('programs/latee/unit', 'programs.latee.unit')->name('programs.unit');
 });
+Route::name('lateei.')->group(function () {
+    Route::view('programs/lateei/pendidikan', 'programs.lateei.pendidikan')->name('programs.pendidikan');
+    Route::view('programs/lateei/peribadatan', 'programs.lateei.peribadatan')->name('programs.peribadatan');
+    Route::view('programs/lateei/peminatan', 'programs.lateei.peminatan')->name('programs.peminatan');
+    Route::view('programs/lateei/publikasi', 'programs.lateei.publikasi')->name('programs.publikasi');
+    Route::view('programs/lateei/kesehatan', 'programs.lateei.kesehatan')->name('programs.kesehatan');
+    Route::view('programs/lateei/ketertiban', 'programs.lateei.ketertiban')->name('programs.ketertiban');
+    Route::view('programs/lateei/infrastruktur', 'programs.lateei.infrastruktur')->name('programs.infrastruktur');
+    Route::view('programs/lateei/unit', 'programs.lateei.unit')->name('programs.unit');
+});
+Route::name('lateeii.')->group(function () {
+    Route::view('programs/lateeii/pendidikan', 'programs.lateeii.pendidikan')->name('programs.pendidikan');
+    Route::view('programs/lateeii/peribadatan', 'programs.lateeii.peribadatan')->name('programs.peribadatan');
+    Route::view('programs/lateeii/peminatan', 'programs.lateeii.peminatan')->name('programs.peminatan');
+    Route::view('programs/lateeii/publikasi', 'programs.lateeii.publikasi')->name('programs.publikasi');
+    Route::view('programs/lateeii/kesehatan', 'programs.lateeii.kesehatan')->name('programs.kesehatan');
+    Route::view('programs/lateeii/ketertiban', 'programs.lateeii.ketertiban')->name('programs.ketertiban');
+    Route::view('programs/lateeii/infrastruktur', 'programs.lateeii.infrastruktur')->name('programs.infrastruktur');
+    Route::view('programs/lateeii/tata-busana', 'programs.lateeii.tata-busana')->name('programs.tata-busana');
+    Route::view('programs/lateeii/unit', 'programs.lateeii.unit')->name('programs.unit');
+});
+Route::view('profile', 'profile')->name('profile');
+Route::view('pendaftaran', 'pendaftaran')->name('pendaftaran');
+Route::view('contact', 'contact')->name('contact');
 Route::view('blogs/show', 'blogs.show')->name('blogs.show');
 Route::view('blogs/index', 'blogs.index')->name('blogs.index');
 

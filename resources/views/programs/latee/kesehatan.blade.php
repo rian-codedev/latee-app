@@ -3,7 +3,7 @@
     @include('partials.header')
 
     <main>
-        <!-- Hero Section -->
+        <!-- Page Hero -->
         <section class="relative w-full py-10 md:py-16 px-4 md:px-6 overflow-hidden flex justify-center">
             <div class="relative w-full max-w-[1400px] min-h-[300px] md:min-h-[350px] rounded-[2.5rem] overflow-hidden flex items-center shadow-2xl bg-white border border-slate-100 bg-texture-noise">
                 <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -29,56 +29,58 @@
             </div>
         </section>
 
-        <!-- Section Kesehatan -->
+        <!-- Kesehatan -->
         <section class="py-20 bg-white" id="kesehatan">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="reveal mb-12">
+                <div class="reveal mb-8">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Kesehatan</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Pelayanan & Pola Hidup Sehat</h2>
-                    <p class="text-slate-500 text-sm mt-2 max-w-3xl">Dalam upaya meningkatkan kesadaran hidup sehat dan peka terhadap hal-hal yang membahayakan diri serta lingkungan sekitar, PPA Latee memiliki serangkaian langkah nyata. Komitmen memberikan pelayanan terbaik bagi seluruh santri menjadi prioritas utama.[reference:0]</p>
+                    <p class="text-slate-500 text-sm mt-2 max-w-3xl">Dalam upaya meningkatkan kesadaran hidup sehat dan peka terhadap hal-hal yang membahayakan diri serta lingkungan sekitar, PPA Latee memiliki serangkaian langkah nyata. Komitmen memberikan pelayanan terbaik bagi seluruh santri menjadi prioritas utama.</p>
+                </div>
+
+                <!-- GAMBAR UTAMA SECTION -->
+                <div class="reveal delay-100 mb-12 overflow-hidden rounded-3xl shadow-lg border border-slate-100 h-64 md:h-96 relative group">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop" alt="Kegiatan Senam dan Hidup Sehat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6 md:p-10">
+                        <p class="text-white text-sm md:text-base font-semibold max-w-2xl leading-relaxed">Senam santri, penanaman TOGA, dan kerja bakti demi terciptanya lingkungan yang sehat dan asri.</p>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Senam Santri -->
                     <div class="reveal delay-100 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Senam Santri</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Diadakan di depan musala setiap Jumat pagi setelah kerja bakti. Formatnya digilir per blok; wajib bagi blok yang mendapat giliran, dan terbuka bagi blok lain. Bertujuan menjaga kebugaran dan kesehatan tubuh.[reference:1]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Diadakan di depan musala setiap Jumat pagi setelah kerja bakti. Formatnya digilir per blok; wajib bagi blok yang mendapat giliran, dan terbuka bagi blok lain. Bertujuan menjaga kebugaran dan kesehatan tubuh.</p>
                     </div>
 
-                    <!-- Jamu Tradisional -->
                     <div class="reveal delay-200 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Pembuatan Jamu Tradisional</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Mengolah kunyit, jahe, dan temu lawak menjadi ekstrak jamu tumbuk kering siap saji agar lebih awet. Di Latee II, pembuatan bersifat wajib dan bergiliran setiap blok dengan bahan 1–2 kg per pekan. Di Latee I, kegiatan ini berlangsung tiga kali setahun dan menyediakan jamu stamina, temu lawak, serta nona wangi.[reference:2][reference:3]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Mengolah kunyit, jahe, dan temu lawak menjadi ekstrak jamu tumbuk kering siap saji agar lebih awet. Di Latee II, pembuatan bersifat wajib dan bergiliran setiap blok dengan bahan 1–2 kg per pekan. Di Latee I, kegiatan ini berlangsung tiga kali setahun dan menyediakan jamu stamina, temu lawak, serta nona wangi.</p>
                     </div>
 
-                    <!-- Penyuluhan Kesehatan -->
                     <div class="reveal delay-300 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Penyuluhan Kesehatan</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Kegiatan rutin tahunan dengan mengundang pembicara ahli sesuai tema. Topik yang pernah dibahas meliputi kesehatan reproduksi, kebersihan diri dan lingkungan, hingga tema kecantikan. Tujuannya menambah wawasan dan menumbuhkan kesadaran santri akan pentingnya kesehatan.[reference:4]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Kegiatan rutin tahunan dengan mengundang pembicara ahli sesuai tema. Topik yang pernah dibahas meliputi kesehatan reproduksi, kebersihan diri dan lingkungan, hingga tema kecantikan. Tujuannya menambah wawasan dan menumbuhkan kesadaran santri akan pentingnya kesehatan.</p>
                     </div>
 
-                    <!-- Kontrol Kebersihan Kuku -->
                     <div class="reveal delay-100 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Kontrol Kebersihan Kuku</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Dilakukan setiap setengah bulan, dan lebih sering menjelang berangkat sekolah atau liburan. Santri dilarang memanjangkan kuku kecuali satu jari. Pewarnaan kuku (henna/kutek) tidak diperbolehkan kecuali untuk kepentingan menikah.[reference:5]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Dilakukan setiap setengah bulan, dan lebih sering menjelang berangkat sekolah atau liburan. Santri dilarang memanjangkan kuku kecuali satu jari. Pewarnaan kuku (henna/kutek) tidak diperbolehkan kecuali untuk kepentingan menikah.</p>
                     </div>
 
-                    <!-- Penanaman TOGA -->
                     <div class="reveal delay-200 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Penanaman TOGA</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Tanaman Obat Keluarga ditanam untuk memudahkan santri mendapatkan obat herbal siap saji seperti kunyit, daun beluntas, dan cocor bebek. Di Latee I, tanaman yang dipelihara antara lain air mata ibu, pegagan, serta sirih biasa dan sirih merah.[reference:6][reference:7]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Tanaman Obat Keluarga ditanam untuk memudahkan santri mendapatkan obat herbal siap saji seperti kunyit, daun beluntas, dan cocor bebek. Di Latee I, tanaman yang dipelihara antara lain air mata ibu, pegagan, serta sirih biasa dan sirih merah.</p>
                     </div>
 
-                    <!-- Obat Tradisional & Generik -->
                     <div class="reveal delay-300 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Obat Tradisional & Generik</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Menyediakan obat herbal, tradisional, dan generik untuk penanganan pertama santri sakit sebelum dirujuk ke poskestren atau puskesmas. Jenis obat disesuaikan dengan keluhan umum seperti sakit kepala, demam, sakit perut, muntaber, dan sakit gigi. Tersedia juga kotak P3K untuk luka.[reference:8][reference:9]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Menyediakan obat herbal, tradisional, dan generik untuk penanganan pertama santri sakit sebelum dirujuk ke poskestren atau puskesmas. Jenis obat disesuaikan dengan keluhan umum seperti sakit kepala, demam, sakit perut, muntaber, dan sakit gigi. Tersedia juga kotak P3K untuk luka.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Prosedur Penanganan Santri Sakit -->
+        <!-- Prosedur -->
         <section class="py-20 bg-slate-50" id="prosedur">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-10 text-center">
@@ -90,73 +92,66 @@
                     <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center">
                         <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mx-auto mb-4 font-bold">1</div>
                         <h3 class="font-bold text-slate-900 mb-2">Penanganan Awal</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Kantor pesantren menyediakan obat tradisional, generik, dan herbal untuk diambil sesuai keluhan santri.[reference:10]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Kantor pesantren menyediakan obat tradisional, generik, dan herbal untuk diambil sesuai keluhan santri.</p>
                     </div>
                     <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center">
                         <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mx-auto mb-4 font-bold">2</div>
                         <h3 class="font-bold text-slate-900 mb-2">Rujukan ke Poskestren</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Jika dalam beberapa hari kondisi tidak membaik, santri dirujuk ke poskestren atau puskesmas terdekat. Poskestren menyediakan layanan rawat jalan dan rawat inap 24 jam.[reference:11]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Jika dalam beberapa hari kondisi tidak membaik, santri dirujuk ke poskestren atau puskesmas terdekat. Poskestren menyediakan layanan rawat jalan dan rawat inap 24 jam.</p>
                     </div>
                     <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center">
                         <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mx-auto mb-4 font-bold">3</div>
                         <h3 class="font-bold text-slate-900 mb-2">Rekomendasi Pulang</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Santri baru diperbolehkan pulang apabila seluruh prosedur telah dilalui dan kondisi sakit tetap atau semakin parah, dibuktikan dengan memo resmi dari pengurus kesehatan.[reference:12]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Santri baru diperbolehkan pulang apabila seluruh prosedur telah dilalui dan kondisi sakit tetap atau semakin parah, dibuktikan dengan memo resmi dari pengurus kesehatan.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section Lingkungan Hidup -->
+        <!-- Lingkungan Hidup -->
         <section class="py-20 bg-white" id="lingkungan">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-12">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Lingkungan Hidup</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Kebersihan & Keindahan</h2>
-                    <p class="text-slate-500 text-sm mt-2 max-w-3xl">Kebersihan erat kaitannya dengan kesehatan dan merupakan sebagian dari iman. Hubungan baik antara manusia dan lingkungan adalah wujud manusia sebagai khalifah fil ardh. Oleh karena itu, pengurus membentuk Divisi Kebersihan dan Keindahan untuk menciptakan serta memelihara lingkungan yang asri.[reference:13][reference:14]</p>
+                    <p class="text-slate-500 text-sm mt-2 max-w-3xl">Kebersihan erat kaitannya dengan kesehatan dan merupakan sebagian dari iman. Hubungan baik antara manusia dan lingkungan adalah wujud manusia sebagai khalifah fil ardh. Oleh karena itu, pengurus membentuk Divisi Kebersihan dan Keindahan untuk menciptakan serta memelihara lingkungan yang asri.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Pilah Sampah -->
                     <div class="reveal delay-100 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Pilah Sampah Organik & Anorganik</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Pesantren menyediakan wadah khusus untuk botol plastik dan kardus. Hasil pemilahan dimanfaatkan kembali, dan keuntungannya masuk ke kas pesantren. Di Latee I, sosialisasi dilakukan agar santri membiasakan membuang sampah sesuai tempatnya.[reference:15][reference:16]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Pesantren menyediakan wadah khusus untuk botol plastik dan kardus. Hasil pemilahan dimanfaatkan kembali, dan keuntungannya masuk ke kas pesantren. Di Latee I, sosialisasi dilakukan agar santri membiasakan membuang sampah sesuai tempatnya.</p>
                     </div>
 
-                    <!-- Kerja Bakti -->
                     <div class="reveal delay-200 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Kerja Bakti</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Dilaksanakan setiap Jumat pagi untuk membersihkan seluruh lingkungan pesantren, termasuk area dhalem. Kegiatan ini dikoordinir oleh Divisi Kebersihan guna menciptakan lingkungan yang bersih dan asri.[reference:17][reference:18]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Dilaksanakan setiap Jumat pagi untuk membersihkan seluruh lingkungan pesantren, termasuk area dhalem. Kegiatan ini dikoordinir oleh Divisi Kebersihan guna menciptakan lingkungan yang bersih dan asri.</p>
                     </div>
 
-                    <!-- Menguras Kolam & Kamar Mandi -->
                     <div class="reveal delay-300 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Menguras Kolam & Kamar Mandi</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Di Latee II dilakukan setiap setengah bulan, sedangkan di Latee I setiap bulan dengan melibatkan pengurus pusat dan pengurus blok. Tujuannya memelihara kebersihan bak kolam dan kamar mandi.[reference:19][reference:20]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Di Latee II dilakukan setiap setengah bulan, sedangkan di Latee I setiap bulan dengan melibatkan pengurus pusat dan pengurus blok. Tujuannya memelihara kebersihan bak kolam dan kamar mandi.</p>
                     </div>
 
-                    <!-- Lomba Kebersihan Kamar -->
                     <div class="reveal delay-100 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Lomba Kebersihan & Kerapian Kamar</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Bentuk apresiasi bagi santri yang konsisten menjaga kebersihan kamar. Pengontrolan dilakukan setiap Kamis (Latee II) atau secara kondisional (Latee I). Pemenang diumumkan pada penutupan aktivitas pesantren.[reference:21][reference:22]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Bentuk apresiasi bagi santri yang konsisten menjaga kebersihan kamar. Pengontrolan dilakukan setiap Kamis (Latee II) atau secara kondisional (Latee I). Pemenang diumumkan pada penutupan aktivitas pesantren.</p>
                     </div>
 
-                    <!-- Piket Harian -->
                     <div class="reveal delay-200 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Piket Harian</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Setiap kamar mendapat jadwal piket untuk menyapu halaman, membuang sampah, serta membersihkan kamar mandi dan kolam. Untuk memastikan pelaksanaannya, dibentuk ‘piket keliling’ dari pengurus non-divisi kebersihan.[reference:23][reference:24]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Setiap kamar mendapat jadwal piket untuk menyapu halaman, membuang sampah, serta membersihkan kamar mandi dan kolam. Untuk memastikan pelaksanaannya, dibentuk ‘piket keliling’ dari pengurus non-divisi kebersihan.</p>
                     </div>
 
-                    <!-- KPL (Latee I) -->
                     <div class="reveal delay-300 bg-slate-50/70 border border-slate-100 rounded-3xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Komunitas Peduli Lingkungan (KPL)</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Dibentuk Januari 2020 di Latee I di bawah Divisi Kebersihan dan Keindahan. Kegiatannya meliputi memilah sampah, membersihkan jalanan umum di Annuqayah Putri, dan memulung sampah di area PPA Latee I.[reference:25]</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Dibentuk Januari 2020 di Latee I di bawah Divisi Kebersihan dan Keindahan. Kegiatannya meliputi memilah sampah, membersihkan jalanan umum di Annuqayah Putri, dan memulung sampah di area PPA Latee I.</p>
                     </div>
                 </div>
 
-                <!-- Kebijakan Pengurangan Plastik -->
                 <div class="reveal delay-400 mt-8 bg-brand-600 text-white rounded-3xl p-8 shadow-xl shadow-brand-500/20">
                     <h3 class="text-xl font-bold mb-3">Kebijakan Pengurangan Sampah Plastik</h3>
-                    <p class="text-sm text-brand-50 leading-relaxed">Penanganan masalah sampah terus diupayakan melalui aturan baru: membatasi penggunaan plastik, mewajibkan membawa kotak nasi dan botol air pribadi, melarang pembalut sekali pakai, serta mengimbau santri membawa tas sendiri saat berbelanja. Semua ini demi menciptakan lingkungan yang higienis dan berkelanjutan.[reference:26]</p>
+                    <p class="text-sm text-brand-50 leading-relaxed">Penanganan masalah sampah terus diupayakan melalui aturan baru: membatasi penggunaan plastik, mewajibkan membawa kotak nasi dan botol air pribadi, melarang pembalut sekali pakai, serta mengimbau santri membawa tas sendiri saat berbelanja. Semua ini demi menciptakan lingkungan yang higienis dan berkelanjutan.</p>
                 </div>
             </div>
         </section>

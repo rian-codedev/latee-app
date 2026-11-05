@@ -3,7 +3,7 @@
     @include('partials.header')
 
     <main>
-        <!-- Hero Section -->
+        <!-- Page Hero -->
         <section class="relative w-full py-10 md:py-16 px-4 md:px-6 overflow-hidden flex justify-center">
             <div class="relative w-full max-w-[1400px] min-h-[300px] md:min-h-[350px] rounded-[2.5rem] overflow-hidden flex items-center shadow-2xl bg-white border border-slate-100 bg-texture-noise">
                 <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -29,13 +29,21 @@
             </div>
         </section>
 
-        <!-- Gambaran Umum Infrastruktur -->
+        <!-- Gambaran Umum -->
         <section class="py-20 bg-white" id="gambaran-umum">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="reveal mb-12">
+                <div class="reveal mb-8">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Gambaran Umum</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Perkembangan Infrastruktur</h2>
-                    <p class="text-slate-500 text-sm mt-2 max-w-3xl">Sejak didirikan pada tahun 1923, Pondok Pesantren Annuqayah Latee terus berbenah. Dari areal tanah seluas 2,5 hektare pada tahun 1978, kini pesantren telah berkembang pesat dengan berbagai fasilitas fisik yang menunjang kegiatan pendidikan dan peribadatan santri[reference:0].</p>
+                    <p class="text-slate-500 text-sm mt-2 max-w-3xl">Sejak didirikan pada tahun 1923, Pondok Pesantren Annuqayah Latee terus berbenah. Dari areal tanah seluas 2,5 hektare pada tahun 1978, kini pesantren telah berkembang pesat dengan berbagai fasilitas fisik yang menunjang kegiatan pendidikan dan peribadatan santri.</p>
+                </div>
+
+                <!-- GAMBAR UTAMA SECTION -->
+                <div class="reveal delay-100 mb-12 overflow-hidden rounded-3xl shadow-lg border border-slate-100 h-64 md:h-96 relative group">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop" alt="Gedung dan Fasilitas Pesantren" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6 md:p-10">
+                        <p class="text-white text-sm md:text-base font-semibold max-w-2xl leading-relaxed">Pembangunan dan pemeliharaan infrastruktur untuk kenyamanan belajar santri.</p>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -70,40 +78,34 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Asrama Santri -->
                     <div class="reveal delay-100 bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Asrama Santri</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Terdapat 525 asrama santri yang tersebar di berbagai rayon, menyediakan tempat tinggal yang nyaman dan mendukung pembinaan karakter serta kemandirian santri[reference:1].</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Terdapat 525 asrama santri yang tersebar di berbagai rayon, menyediakan tempat tinggal yang nyaman dan mendukung pembinaan karakter serta kemandirian santri.</p>
                     </div>
 
-                    <!-- Ruang Kelas & Madrasah Diniyah -->
                     <div class="reveal delay-200 bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Ruang Kelas & Madrasah Diniyah</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Tersedia 100 ruang kelas untuk kegiatan belajar mengajar formal dan diniyah. Madrasah Diniyah Annuqayah Latee (MADAL) memiliki ruang khusus, termasuk gedung dua lantai untuk menampung kegiatan pembelajaran kitab kuning[reference:2][reference:3].</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Tersedia 100 ruang kelas untuk kegiatan belajar mengajar formal dan diniyah. Madrasah Diniyah Annuqayah Latee (MADAL) memiliki ruang khusus, termasuk gedung dua lantai untuk menampung kegiatan pembelajaran kitab kuning.</p>
                     </div>
 
-                    <!-- Masjid & Mushalla -->
                     <div class="reveal delay-300 bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Masjid & Mushalla</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Terdapat dua masjid jamik dan sembilan mushalla yang menjadi pusat kegiatan ubudiyah, salat berjamaah, dan berbagai aktivitas keagamaan santri[reference:4].</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Terdapat dua masjid jamik dan sembilan mushalla yang menjadi pusat kegiatan ubudiyah, salat berjamaah, dan berbagai aktivitas keagamaan santri.</p>
                     </div>
 
-                    <!-- Perpustakaan -->
                     <div class="reveal delay-100 bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Perpustakaan</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Perpustakaan pesantren menyediakan berbagai koleksi kitab kuning, buku umum, dan media publikasi yang dikelola oleh divisi terkait, mendukung literasi dan riset santri[reference:5].</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Perpustakaan pesantren menyediakan berbagai koleksi kitab kuning, buku umum, dan media publikasi yang dikelola oleh divisi terkait, mendukung literasi dan riset santri.</p>
                     </div>
 
-                    <!-- Balai Kesehatan -->
                     <div class="reveal delay-200 bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Balai Kesehatan</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Satu unit balai kesehatan (poskestren) yang memberikan layanan kesehatan dasar, penanganan pertama, hingga rujukan bagi santri yang membutuhkan perawatan lebih lanjut[reference:6].</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Satu unit balai kesehatan (poskestren) yang memberikan layanan kesehatan dasar, penanganan pertama, hingga rujukan bagi santri yang membutuhkan perawatan lebih lanjut.</p>
                     </div>
 
-                    <!-- Kantor & Administrasi -->
                     <div class="reveal delay-300 bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Kantor & Administrasi</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">Tersedia ruang kantor untuk pengelolaan pesantren, madrasah, dan berbagai divisi, termasuk ruang tamu, dapur, dan gudang untuk mendukung operasional harian[reference:7].</p>
+                        <p class="text-xs text-slate-600 leading-relaxed">Tersedia ruang kantor untuk pengelolaan pesantren, madrasah, dan berbagai divisi, termasuk ruang tamu, dapur, dan gudang untuk mendukung operasional harian.</p>
                     </div>
                 </div>
             </div>
@@ -120,11 +122,11 @@
                 <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-brand-600 text-white rounded-3xl p-8 shadow-xl shadow-brand-500/20">
                         <h3 class="text-xl font-bold mb-3">Peningkatan Kualitas Fasilitas</h3>
-                        <p class="text-sm text-brand-50 leading-relaxed">Pesantren terus berupaya meningkatkan kualitas infrastruktur, termasuk pembangunan gedung madrasah diniyah dua lantai dan perluasan masjid, sebagaimana yang telah dilakukan melalui dukungan para alumni[reference:8].</p>
+                        <p class="text-sm text-brand-50 leading-relaxed">Pesantren terus berupaya meningkatkan kualitas infrastruktur, termasuk pembangunan gedung madrasah diniyah dua lantai dan perluasan masjid, sebagaimana yang telah dilakukan melalui dukungan para alumni.</p>
                     </div>
                     <div class="bg-slate-50/70 border border-slate-100 rounded-3xl p-8">
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Dukungan Pemerintah & Mitra</h3>
-                        <p class="text-sm text-slate-600 leading-relaxed">Berbagai bantuan dari pemerintah dan mitra terus mengalir untuk pengembangan sarana pendidikan dan pelayanan santri, seperti bantuan pendidikan senilai Rp100 juta dari Kementerian Agama RI[reference:9]. Sinergi ini menjadi bukti komitmen bersama dalam memajukan pendidikan pesantren.</p>
+                        <p class="text-sm text-slate-600 leading-relaxed">Berbagai bantuan dari pemerintah dan mitra terus mengalir untuk pengembangan sarana pendidikan dan pelayanan santri, seperti bantuan pendidikan senilai Rp100 juta dari Kementerian Agama RI. Sinergi ini menjadi bukti komitmen bersama dalam memajukan pendidikan pesantren.</p>
                     </div>
                 </div>
             </div>

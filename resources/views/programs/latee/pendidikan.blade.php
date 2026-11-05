@@ -3,7 +3,7 @@
     @include('partials.header')
 
     <main>
-        <!-- BEGIN: Page Hero -->
+        <!-- Page Hero -->
         <section class="relative w-full py-10 md:py-16 px-4 md:px-6 overflow-hidden flex justify-center">
             <div class="relative w-full max-w-[1400px] min-h-[300px] md:min-h-[350px] rounded-[2.5rem] overflow-hidden flex items-center shadow-2xl bg-white border border-slate-100 bg-texture-noise">
                 <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -29,12 +29,20 @@
             </div>
         </section>
 
-        <!-- BEGIN: Madrasah Diniyah -->
+        <!-- Madrasah Diniyah -->
         <section class="py-20 bg-white" id="diniyah">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="reveal mb-12">
+                <div class="reveal mb-8">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Madrasah Diniyah</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Jantung Pendidikan Annuqayah Latee</h2>
+                </div>
+
+                <!-- Gambar Utama Section -->
+                <div class="reveal delay-100 mb-12 overflow-hidden rounded-3xl shadow-lg border border-slate-100 h-64 md:h-96 relative group">
+                    <img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?q=80&w=1200&auto=format&fit=crop" alt="Suasana Belajar Kitab Kuning" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6 md:p-10">
+                        <p class="text-white text-sm md:text-base font-semibold max-w-2xl leading-relaxed">Kegiatan belajar mengajar kitab kuning di Madrasah Diniyah Annuqayah Latee.</p>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -102,13 +110,22 @@
             </div>
         </section>
 
-        <!-- BEGIN: Pengajian Al-Quran & Kitab -->
+        <!-- Pengajian Al-Quran & Kitab -->
         <section class="py-20 bg-slate-50" id="pengajian">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="reveal mb-12 text-center">
+                <div class="reveal mb-8 text-center">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Pengajian Al-Quran & Kitab</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Elemen Vital Kultur Pesantren</h2>
                     <p class="text-slate-500 text-sm max-w-xl mx-auto mt-2">Penekanan untuk bisa membaca Al-Quran dengan fasih dan benar sama pentingnya dengan sekolah Madrasah Diniyah. Begitupun dengan Kitab Turats (Kitab Kuning).</p>
+                </div>
+
+                <div class="reveal delay-100 mb-12 flex justify-center">
+                    <div class="relative w-full max-w-3xl overflow-hidden rounded-3xl shadow-lg border border-slate-100 h-56 md:h-72 group">
+                        <img src="https://images.unsplash.com/photo-1584286595398-a59f21d313f5?q=80&w=1000&auto=format&fit=crop" alt="Membaca Al-Quran" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                            <p class="text-white font-bold text-lg md:text-xl text-center px-4 drop-shadow-md">"Sebaik-baik kalian adalah yang belajar Al-Quran dan mengajarkannya."</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -166,7 +183,7 @@
             </div>
         </section>
 
-        <!-- BEGIN: Madrasah SKIA -->
+        <!-- Madrasah SKIA -->
         <section class="py-20 bg-white" id="skia">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-12 text-center">
@@ -175,7 +192,7 @@
                     <p class="text-slate-500 text-sm max-w-xl mx-auto mt-2">Madrasah SKIA memberikan pemahaman kepada santri baru mengenai isi buku SKIA (Syarat Kecakapan Ibadah Amaliah) yang menjadi pegangan wajib santri.</p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
                     <div class="reveal delay-100 bg-slate-50/70 border border-slate-100 rounded-3xl p-8 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-3">Materi Pokok</h3>
                         <p class="text-sm text-slate-600 leading-relaxed">Buku SKIA berisi pokok dasar agama, ushuluddin, yang terdiri dari ilmu fikih (syariah), tauhid (akidah), akhlak (tasawuf), dan ilmu tajwid serta amaliyah yaumiyah seperti tahlil dan doa-doa penting.</p>
@@ -193,14 +210,20 @@
                     </div>
                 </div>
 
-                <div class="reveal delay-400 mt-8 bg-brand-600 text-white rounded-3xl p-8 shadow-xl shadow-brand-500/20">
-                    <h3 class="text-xl font-bold mb-3">Kelulusan & Harapan</h3>
-                    <p class="text-sm text-brand-50 leading-relaxed">Hafalan wajib menjadi syarat utama kelulusan santri di Madrasah SKIA. Dewan guru terdiri dari ustaz-ustaz senior yang dianggap mampu. Dengan adanya Madrasah SKIA, diharapkan santri baru memiliki pemahaman dasar agama yang penting sebagai pondasi kearifan seorang santri.</p>
+                <div class="reveal delay-400 mt-8 bg-brand-600 text-white rounded-3xl p-6 md:p-8 shadow-xl shadow-brand-500/20 flex flex-col md:flex-row items-center gap-8 overflow-hidden relative group">
+                    <div class="w-full md:w-1/3 shrink-0 relative overflow-hidden rounded-2xl shadow-md h-48 md:h-56">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop" alt="Santri Madrasah SKIA" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="w-full md:w-2/3 relative z-10">
+                        <h3 class="text-xl font-bold mb-3">Kelulusan & Harapan</h3>
+                        <p class="text-sm text-brand-50 leading-relaxed">Hafalan wajib menjadi syarat utama kelulusan santri di Madrasah SKIA. Dewan guru terdiri dari ustaz-ustaz senior yang dianggap mampu. Dengan adanya Madrasah SKIA, diharapkan santri baru memiliki pemahaman dasar agama yang penting sebagai pondasi kearifan seorang santri.</p>
+                    </div>
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
                 </div>
             </div>
         </section>
 
-        <!-- BEGIN: CTA -->
+        <!-- CTA -->
         <section class="py-16 bg-slate-50">
             <div class="max-w-4xl mx-auto px-6 text-center reveal">
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">Siap Bergabung Menjadi Santri?</h2>

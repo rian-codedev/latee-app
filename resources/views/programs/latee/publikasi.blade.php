@@ -3,7 +3,7 @@
     @include('partials.header')
 
     <main>
-        <!-- Hero Section -->
+        <!-- Page Hero -->
         <section class="relative w-full py-10 md:py-16 px-4 md:px-6 overflow-hidden flex justify-center">
             <div class="relative w-full max-w-[1400px] min-h-[300px] md:min-h-[350px] rounded-[2.5rem] overflow-hidden flex items-center shadow-2xl bg-white border border-slate-100 bg-texture-noise">
                 <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -32,10 +32,18 @@
         <!-- Perpustakaan -->
         <section class="py-20 bg-white" id="perpustakaan">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="reveal mb-12">
+                <div class="reveal mb-8">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Perpustakaan</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Media Publikasi Pustakawan</h2>
                     <p class="text-slate-500 text-sm mt-2 max-w-2xl">Beberapa media publikasi yang dibawahi oleh pustakawan Pondok Pesantren Annuqayah Latee.</p>
+                </div>
+
+                <!-- GAMBAR UTAMA SECTION -->
+                <div class="reveal delay-100 mb-12 overflow-hidden rounded-3xl shadow-lg border border-slate-100 h-64 md:h-96 relative group">
+                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1200&auto=format&fit=crop" alt="Kegiatan Literasi dan Publikasi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6 md:p-10">
+                        <p class="text-white text-sm md:text-base font-semibold max-w-2xl leading-relaxed">Media publikasi santri: dari mading, buletin, hingga majalah berbahasa Arab dan Inggris.</p>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -108,10 +116,10 @@
             </div>
         </section>
 
-        <!-- Lumbung (Teater SaKSI) -->
+        <!-- Lumbung -->
         <section class="py-20 bg-slate-50" id="lumbung">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="reveal mb-12">
+                <div class="reveal mb-8">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Lumbung</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Kreativitas Sastra Teater SaKSI</h2>
                 </div>
@@ -143,7 +151,7 @@
             </div>
         </section>
 
-        <!-- Media Publikasi Dalfis -->
+        <!-- Media Dalfis -->
         <section class="py-20 bg-white" id="dalfis">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-12">
@@ -153,7 +161,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Abthal -->
                     <div class="reveal delay-100 bg-slate-50/70 border border-slate-100 rounded-3xl p-8 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Abthal</h3>
                         <p class="text-sm text-slate-600 leading-relaxed mb-4">Media informasi berbahasa Arab yang memuat berita-berita kegiatan di Pondok Pesantren Annuqayah Latee. Dikelola oleh pengurus harian Dalfis.</p>
@@ -166,7 +173,6 @@
                         </div>
                     </div>
 
-                    <!-- Mimain -->
                     <div class="reveal delay-200 bg-slate-50/70 border border-slate-100 rounded-3xl p-8 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Mimain</h3>
                         <p class="text-sm text-slate-600 leading-relaxed mb-4">Media berisi tulisan berbahasa Arab karya santri Dalfis, khusus dikelola kelas <em>mutawassith</em> dan <em>mutaqaddim</em>, di bawah bimbingan pengurus Departemen Tarbiyah Dalfis.</p>
@@ -183,7 +189,6 @@
                         </div>
                     </div>
 
-                    <!-- Majalah Mufakkirah -->
                     <div class="reveal delay-300 bg-slate-50/70 border border-slate-100 rounded-3xl p-8 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Majalah Mufakkirah</h3>
                         <p class="text-sm text-slate-600 leading-relaxed mb-4">Majalah berbahasa Arab yang dikelola oleh Departemen Penerbitan dan Pengembangan Bakat Dalfis. Terbit dua kali dalam setahun.</p>
@@ -207,7 +212,6 @@
                         </div>
                     </div>
 
-                    <!-- Ajyal -->
                     <div class="reveal delay-400 bg-slate-50/70 border border-slate-100 rounded-3xl p-8 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-xl font-bold text-slate-900 mb-3">Ajyal</h3>
                         <p class="text-sm text-slate-600 leading-relaxed mb-4">Media tulis menulis yang dikelola oleh santri <em>mustawa I'dadi</em> dan <em>Mubtadi'</em>, di bawah bimbingan pengurus Departemen Penerbitan dan Pengembangan Bakat.</p>
@@ -226,7 +230,7 @@
             </div>
         </section>
 
-        <!-- Media Publikasi EAL -->
+        <!-- Media EAL -->
         <section class="py-20 bg-slate-50" id="eal">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-12">
@@ -236,7 +240,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Buletin Respect -->
                     <div class="reveal delay-100 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Buletin Respect</h3>
                         <p class="text-xs text-slate-600 leading-relaxed mb-3">Buletin berbahasa Inggris yang diterbitkan setiap semester oleh kru khusus (tutor dan sebagian member EAL). Berisi tulisan karya member EAL dan santri Annuqayah secara umum.</p>
@@ -255,7 +258,6 @@
                         </div>
                     </div>
 
-                    <!-- Mading ECS -->
                     <div class="reveal delay-200 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Mading ECS</h3>
                         <p class="text-xs text-slate-600 leading-relaxed mb-3">Mading berbahasa Inggris (English Creativity Space) yang dikelola kelas akhir EAL. Berisi tulisan khusus member Translation Class, terbit setiap pekan.</p>
@@ -271,7 +273,6 @@
                         </div>
                     </div>
 
-                    <!-- Mading The Real -->
                     <div class="reveal delay-300 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Mading The Real</h3>
                         <p class="text-xs text-slate-600 leading-relaxed mb-3">Mading berbahasa Inggris (The Read Academic Literature) yang dikelola tutor dan member Reading Class. Berisi tulisan khusus member Reading Class, terbit setiap dua pekan.</p>
@@ -285,7 +286,6 @@
                         </div>
                     </div>
 
-                    <!-- Mading Soul -->
                     <div class="reveal delay-400 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">Mading Soul</h3>
                         <p class="text-xs text-slate-600 leading-relaxed mb-3">Mading berbahasa Inggris (Speaking Opus of Literature) yang dikelola tutor dan member Speaking Class. Berisi tulisan khusus member Speaking Class, terbit setiap dua pekan.</p>
@@ -299,7 +299,6 @@
                         </div>
                     </div>
 
-                    <!-- LHO (Tambahan dari daftar) -->
                     <div class="reveal delay-500 bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-lg font-bold text-slate-900 mb-2">LHO</h3>
                         <p class="text-xs text-slate-600 leading-relaxed">Salah satu media publikasi EAL yang disebutkan dalam daftar, melengkapi ekosistem literasi berbahasa Inggris di lingkungan pesantren.</p>

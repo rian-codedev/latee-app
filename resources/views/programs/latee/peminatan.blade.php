@@ -3,7 +3,7 @@
     @include('partials.header')
 
     <main>
-        <!-- Hero Section -->
+        <!-- Page Hero -->
         <section class="relative w-full py-10 md:py-16 px-4 md:px-6 overflow-hidden flex justify-center">
             <div class="relative w-full max-w-[1400px] min-h-[300px] md:min-h-[350px] rounded-[2.5rem] overflow-hidden flex items-center shadow-2xl bg-white border border-slate-100 bg-texture-noise">
                 <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -32,10 +32,18 @@
         <!-- Program Unggulan -->
         <section class="py-20 bg-white" id="unit-lokal">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="reveal mb-12 text-center">
+                <div class="reveal mb-8 text-center">
                     <span class="text-xs font-bold tracking-widest text-brand-700 uppercase bg-brand-50 px-4 py-2 rounded-full border border-brand-100">Unit Lokal Khusus</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Program Intensif & Spesialisasi</h2>
                     <p class="text-slate-500 text-sm max-w-xl mx-auto mt-2">Unit lokal khusus yang mewadahi minat santri secara mendalam, mulai dari bahasa Arab, tahfidh, hingga pengembangan Bahasa Inggris.</p>
+                </div>
+
+                <!-- GAMBAR UTAMA SECTION -->
+                <div class="reveal delay-100 mb-12 overflow-hidden rounded-3xl shadow-lg border border-slate-100 h-64 md:h-96 relative group">
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1200&auto=format&fit=crop" alt="Kegiatan Ekstrakurikuler Santri" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6 md:p-10">
+                        <p class="text-white text-sm md:text-base font-semibold max-w-2xl leading-relaxed">Berbagai unit lokal khusus dan ekstrakurikuler menjadi wadah pengembangan minat dan bakat santri.</p>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -113,7 +121,7 @@
             </div>
         </section>
 
-        <!-- Rayon & Lokal Santri Baru -->
+        <!-- Rayon & LSB -->
         <section class="py-20 bg-slate-50" id="rayon">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-12 text-center">
@@ -122,7 +130,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Rayon KH. Ahmad Basyir -->
                     <div class="reveal-left bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-xl font-bold text-slate-900 mb-4">Rayon KH. Ahmad Basyir</h3>
                         <p class="text-sm text-slate-600 leading-relaxed mb-4">Didirikan atas keinginan Alm. KH. Ahmad Basyir Abdullah Sajjad agar santri lebih fokus pada pembelajaran diniyah. Dikenal juga sebagai Rayon Salaf.</p>
@@ -141,7 +148,6 @@
                         </div>
                     </div>
 
-                    <!-- LSB -->
                     <div class="reveal-right bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
                         <h3 class="text-xl font-bold text-slate-900 mb-4">Rayon Lokal Santri Baru (LSB)</h3>
                         <p class="text-sm text-slate-600 leading-relaxed mb-4">Didirikan atas inisiatif KH. M. Ainul Yaqin pada awal tahun pelajaran 2022-2023. Sistem lokalisasi kelompok untuk memberikan perhatian dan bimbingan khusus bagi santri baru.</p>
@@ -167,7 +173,7 @@
             </div>
         </section>
 
-        <!-- Ekstrakurikuler & Seni -->
+        <!-- Ekstrakurikuler -->
         <section class="py-20 bg-white" id="ekstrakurikuler">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="reveal mb-12 text-center">
@@ -177,32 +183,26 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Hadrah -->
                     <div class="reveal delay-100 bg-slate-50/70 border border-slate-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                         <h4 class="font-bold text-slate-900 mb-2">Hadrah Al-Banjari (Hubbul Basyir)</h4>
                         <p class="text-xs text-slate-600 leading-relaxed">Berdiri 2015, wadah shalawat dengan format hybrid (Banjari & Al-Habsyi). Juara 1 Fesban se-Madura dan se-Kabupaten Sumenep.</p>
                     </div>
-                    <!-- Teater SaKSI -->
                     <div class="reveal delay-200 bg-slate-50/70 border border-slate-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                         <h4 class="font-bold text-slate-900 mb-2">Teater SaKSI</h4>
                         <p class="text-xs text-slate-600 leading-relaxed">Komunitas literasi & kebudayaan tertua (berdiri 1991). Menerima Anugerah Sutasoma 2019 kategori Komunitas Sastra dari Balai Bahasa Jatim.</p>
                     </div>
-                    <!-- Pencak Silat -->
                     <div class="reveal delay-300 bg-slate-50/70 border border-slate-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                         <h4 class="font-bold text-slate-900 mb-2">Pencak Silat</h4>
                         <p class="text-xs text-slate-600 leading-relaxed">Melestarikan budaya melalui perguruan Perisai Putih, Cipta Sejati, Sinar Putih, dan Pagar Nusa. Latihan rutin malam Jumat pukul 20.30–23.00.</p>
                     </div>
-                    <!-- Kaligrafi -->
                     <div class="reveal delay-100 bg-slate-50/70 border border-slate-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                         <h4 class="font-bold text-slate-900 mb-2">Kaligrafi</h4>
                         <p class="text-xs text-slate-600 leading-relaxed">Diikuti 36 santri, dilaksanakan malam Minggu & Rabu pukul 21.00 di gedung diniyah lantai atas, dengan mentor berpengalaman.</p>
                     </div>
-                    <!-- Beatbox -->
                     <div class="reveal delay-200 bg-slate-50/70 border border-slate-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                         <h4 class="font-bold text-slate-900 mb-2">Beatbox</h4>
                         <p class="text-xs text-slate-600 leading-relaxed">Ekstrakurikuler seni vokal musik mulut, dilaksanakan malam Selasa pukul 21.00 WIB, diikuti santri dari SLTP hingga Perguruan Tinggi.</p>
                     </div>
-                    <!-- Futsal -->
                     <div class="reveal delay-300 bg-slate-50/70 border border-slate-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
                         <h4 class="font-bold text-slate-900 mb-2">Liga Futsal Latee (LFL)</h4>
                         <p class="text-xs text-slate-600 leading-relaxed">Wadah hobi bola dengan 8 klub terdaftar. Sistem poin (Menang 3, Seri 1, Kalah 0), juara diumumkan saat penutupan Hamdala.</p>

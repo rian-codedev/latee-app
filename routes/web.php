@@ -47,4 +47,8 @@ Route::view('contact', 'contact')->name('contact');
 Route::view('blogs/show', 'blogs.show')->name('blogs.show');
 Route::view('blogs/index', 'blogs.index')->name('blogs.index');
 
+Route::middleware(['role:admin'])->group(function () {
+    Route::livewire('admin/manage-users', 'admin.manage-users')->name('admin.manage-users');
+});
+
 require __DIR__.'/settings.php';

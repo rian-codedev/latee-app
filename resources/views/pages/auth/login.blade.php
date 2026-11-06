@@ -217,7 +217,7 @@
                                 {{-- ========================================== --}}
                                 {{-- SUBMIT BUTTON                               --}}
                                 {{-- ========================================== --}}
-                                <flux:button variant="primary" color="slate" size="base">
+                                <flux:button type="submit" variant="primary" color="slate" size="base">
                                     Login
                                 </flux:button>
                             </form>
